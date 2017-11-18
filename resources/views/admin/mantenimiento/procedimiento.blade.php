@@ -1,9 +1,13 @@
 @extends('layouts.admin')
+@section('title')
+Laboratorio | Procedimientos
+@endsection
+@section('script')
+<script type="text/javascript" src="/js/mantenimiento/procedimiento.js"></script>
+@endsection
 @section('content')
- 
+
 @include('admin.mantenimiento.Modales.EditarProcedimiento')
-
-
 <section class="content-header">
       <h1>
        Procedimiento
@@ -40,12 +44,12 @@
                     <i class="fa fa-user"></i>
                   </div>
                   <div id="DivN" >
-                   <input type="text" placeholder="Nombre del Procedimiento" class="form-control" id="Nombre" name="Nombre">              
+                   <input type="text" placeholder="Nombre del Procedimiento" class="form-control" id="Nombre" name="Nombre">
                   </div>
-                </div>               
-              </div>              
+                </div>
+              </div>
             </div>
-			     <div class="col-md-6">             
+			     <div class="col-md-6">
                <div class="form-group">
                 <label>Costo en Pesos:</label>
                 <div class="input-group">
@@ -54,8 +58,8 @@
                   </div>
                   <div id="DivCl">
                     <input type="number"  id="CostoPeso" class="form-control" placeholder="Costo en Peso" name="CostoPeso" >
-                  </div>                  
-                </div>                
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-6">
@@ -80,13 +84,13 @@
         </div>
 		</div>
    {!! Form::close() !!}
-			</div>	
+			</div>
 		</div>
-          
+
         </div>
-        
+
       </div>
-   
+
     </section>
 <div class="row">
     <div class="col-lg-12">
@@ -106,7 +110,7 @@
                 </tr>
                 </thead>
                 <tbody>
-               
+
                 </tbody>
                 <tfoot>
                 </tfoot>
@@ -115,12 +119,5 @@
         </div>
     </div>
 </div>
-<script src="/js/alertify.min.js"></script>
-<script src="/js/jquery.dataTables.min.js"></script>
-<script src="/js/dataTables.bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/js/sweetalert/sweetalert2.min.css">
-<script type="text/javascript" src="/js/sweetalert/sweetalert2.min.js"></script>
-<script type="text/javascript" src="/js/mantenimiento/procedimiento.js"></script>
 
 @endsection
-

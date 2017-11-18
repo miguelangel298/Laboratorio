@@ -1,6 +1,14 @@
 @extends('layouts.admin')
+@section('title')
+Laboratorio | Empleado
+@endsection
+@section('script')
+<script src="/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="/js/mantenimiento/empleado.js"></script>
+@endsection
 @section('content')
-<meta name="csrf-token" content="{{ csrf_token() }}">
 <section class="content-header">
       <h1>
        Empleados
@@ -263,11 +271,5 @@
 
 </section>
 
-<script src="/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-
-<script src="/js/mantenimiento/empleado.js"></script>
 
 @endsection
-

@@ -1,4 +1,10 @@
 @extends('layouts.admin')
+@section('title')
+Laboratorio | Paciente
+@endsection
+@section('script')
+<script type="text/javascript" src="/js/cliente/paciente.js"></script>
+@endsection
 @section('content')
 @include('admin.mantenimiento.Modales.EditarPaciente')
 <section class="content-header">
@@ -46,5 +52,4 @@
 </div>
 
 
-<script type="text/javascript" src="/js/cliente/paciente.js"></script>
 @endsection

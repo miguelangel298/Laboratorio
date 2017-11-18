@@ -1,8 +1,16 @@
 @extends('layouts.admin')
+@section('title')
+Laboratorio | Factura
+@endsection
+@section('script')
+<script src="/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script type="text/javascript" src="/js/cliente/factura.js"></script>
+@endsection
 @section('content')
 
 @include('admin.mantenimiento.Modales.AgregarCliente')
-<meta name="csrf-token" content="{{ csrf_token() }}">
 <section class="content-header">
       <h1>
        Factura
@@ -38,7 +46,7 @@
                       <option value="{{$cliente->Idpersona}}">{{$cliente->Paciente}}</option>
                       @endforeach
                   </select>
-                
+
                 </div>
                 </div>
             </div>
@@ -189,11 +197,6 @@
       </div>
     <!-- /.row -->
   </section>
-  <script src="/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<script type="text/javascript" src="/js/cliente/factura.js"></script>
 
 
 @endsection
-

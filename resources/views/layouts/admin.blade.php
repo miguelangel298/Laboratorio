@@ -3,16 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+
+
+  <title>@yield('title')</title>
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
-
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- jQuery 3 -->
-  <script src="/js/jquery.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="/css/select2.min.css">
-  <script type="text/javascript" src="/js/select2.full.js"></script>
   <link rel="stylesheet" href="/css/bootstrap/dist/css/bootstrap.min.css">
 
   <link rel="stylesheet" href="/css/font-awesome.css">
@@ -249,37 +248,26 @@
 
 
 <!-- jQuery UI 1.11.4 -->
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/select2.full.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/daterangepicker.js"></script>
-@yield('script')
-
 <script src="/js/jquery.dataTables.min.js"></script>
 <script src="/js/dataTables.bootstrap.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
-<!-- Bootstrap 3.3.7 -->
 <script type="text/javascript" src="/js/sweetalert/sweetalert2.min.js"></script>
-
 <script src="/js/alertify.min.js"></script>
-
 <script src="/js/morris.min.js"></script>
-
 <script src="/js/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
 <script src="/js/fastclick.js"></script>
-<!-- AdminLTE App -->
 <script src="/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/js/bootstrap3-wysihtml5.all.min.js"></script>
-
 <script type="text/javascript" src="/iCheck/icheck.min.js"></script>
-<!-- AdminLTE for demo purposes -->
 <script src="/js/demo.js"></script>
 <script src="/js/datatime/dist/js/bootstrap-datepicker.min.js"></script>
-
+@yield('script')
 
 </body>
 </html>

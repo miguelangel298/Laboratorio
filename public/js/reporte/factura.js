@@ -4,9 +4,9 @@ $(document).ready(function($) {
 $("#BuscarFactura").click(function(e){
 	e.preventDefault();
 	var IdFactura = $("#IdFactura").val();
-var route = "/reporte/factura/"+IdFactura+"";
-var routeDetalle = "/reporte/detalle-factura/"+IdFactura+"";
-var contenedorDatos = $("#contenedorDatos").empty();
+	var route = "/reporte/factura/"+IdFactura+"";
+	var routeDetalle = "/reporte/detalle-factura/"+IdFactura+"";
+	var contenedorDatos = $("#contenedorDatos").empty();
 	$.get(route,function(data){
 		if(data != ""){
 			$("#ContenedorTabla").show();
