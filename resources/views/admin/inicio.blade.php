@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title')
+Laboratorio | Dr Garcia
+@endsection
 @section('content')
 <section class="content-header">
       <h1>

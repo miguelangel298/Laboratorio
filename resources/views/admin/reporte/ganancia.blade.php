@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('title')
+Laboratorio | Reporte Ganancia
+@endsection
 @section('content')
 
 <script type="text/javascript" src="/iCheck/icheck.min.js"></script>
@@ -136,4 +138,3 @@
 <script type="text/javascript" src="/js/sweetalert/sweetalert2.min.js"></script>
 
 @endsection
-

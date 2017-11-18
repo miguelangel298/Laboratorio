@@ -1,6 +1,4 @@
 $(document).ready(function($) {
-
-
 	var IdSucursal = 1;
 	listadoFactura = function(){
 	$("#TablaFactura").DataTable({
@@ -39,6 +37,7 @@ $(document).ready(function($) {
             { responsivePriority: 2, targets: -1 }
         ],
 		 	"columns":[
+				{data: 'IdFactura'},
 		 		{data: 'Fecha'},
 		 		{data: 'Paciente'},
 		 		{data: 'Sucursal'},

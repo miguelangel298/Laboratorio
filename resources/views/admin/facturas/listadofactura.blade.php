@@ -1,4 +1,10 @@
 @extends('layouts.admin')
+@section('title')
+Laboratorio | Listado Factura
+@endsection
+@section('script')
+<script type="text/javascript" src="/js/cliente/listadofactura.js"></script>
+@endsection
 @section('content')
 <section class="content-header">
       <h1>
@@ -22,6 +28,7 @@
               <table id="TablaFactura" width="100%" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>N Factura</th>
                   <th>Fecha</th>
                   <th>Paciente</th>
                   <th>Surcursal</th>
@@ -31,7 +38,7 @@
                 </tr>
                 </thead>
                 <tbody>
-               
+
                	</tbody>
                	<tfoot>
                 </tfoot>
@@ -40,5 +47,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/js/cliente/listadofactura.js"></script>
 @endsection

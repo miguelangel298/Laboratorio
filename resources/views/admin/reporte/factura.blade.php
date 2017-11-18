@@ -1,7 +1,12 @@
 @extends('layouts.admin')
-@section('content')
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
+@section('title')
+Laboratorio | Reporte Factura
+@endsection
+@section('script')
+<script type="text/javascript" src="/js/reporte/factura.js"></script>
+@endsection
+@section('content')
 <section class="content-header">
       <h1>
        Reporte
@@ -25,10 +30,11 @@
         <!-- /.box-header -->
 
         <div class="box-body">
-          <div class="row  ">
+          <div class="row">
             <div class="col-md-3 col-md-offset-4 ">
+              <div id="DivS">
+              <form>
               <div class="form-group ">
-                <div id="DivS"><form >
                   <input type="number"  id="IdFactura" class="form-control" placeholder="Nº Factura" name="Factura" >
                 </div>
               </div>
@@ -37,9 +43,9 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer ">
-         <button type="button" type="submit" id="BuscarFactura" class="btn btn-primary pull-right"> Buscar</button></form>
+         <button type="button"  id="BuscarFactura" type="submit" class="btn btn-primary pull-right"> Buscar</button>
         </div>
-
+          </form>
 	</div>
   </div>
 </div>
@@ -114,22 +120,7 @@
         </div>
       </div>
     </div>
-     {{-- <div class="row no-print">
-        <div class="col-xs-12">
-          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-          <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
-          </button>
-          <button type="button" id="GenerarFactura" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Generar
-          </button>
-        </div>
-      </div> --}}
-    <!-- /.row -->
   </section>
 </div>
-
-<script type="text/javascript" src="/js/reporte/factura.js"></script>
-<link rel="stylesheet" type="text/css" href="/js/sweetalert/sweetalert2.min.css">
-<script type="text/javascript" src="/js/sweetalert/sweetalert2.min.js"></script>
 
 @endsection
