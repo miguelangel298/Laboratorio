@@ -1,5 +1,4 @@
 $(document).ready(function($) {
-	var IdSucursal = 1;
 	listadoFactura = function(){
 	$("#TablaFactura").DataTable({
 		destroy: true,
@@ -30,7 +29,7 @@ $(document).ready(function($) {
 			"processing": true,
 		 	"serverSide": true,
 
-		 	"ajax": "/listadofactura/"+IdSucursal+"",
+		 	"ajax": "/listado-factura",
 		 	responsive: true,
 		 	 columnDefs: [
             { responsivePriority: 1, targets: 0 },
