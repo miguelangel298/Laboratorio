@@ -8,6 +8,7 @@ use Laboratorio\Paciente;
 use Laboratorio\Empresa;
 use DB;
 use DataTables;
+use Auth;
 
 class MantenimientoController extends Controller
 {
@@ -63,8 +64,7 @@ class MantenimientoController extends Controller
     }
 
     public function MostrarProcedimiento($id){
-    	$MostrarProcedimiento = DB::SELECT(DB::raw("
-			SELECT T.Nombre as Procedimiento, T.Costo as Peso,T2.Costo as Dolar
+    	$MostrarProcedimiento = DB::SELECT(DB::raw("SELECT T.Nombre as Procedimiento, T.Costo as Peso,T2.Costo as Dolar
 			FROM	(SELECT procedimientos.IdProcedimiento,procedimientos.Nombre, costos.Costo
 						FROM 	procedimientos inner JOIN
 								costos on costos.IdProcedimiento=procedimientos.IdProcedimiento
@@ -194,7 +194,8 @@ class MantenimientoController extends Controller
         return view('admin.facturas.listadofactura');
     }
 
-    public function ObtenerListadoFactura($IdSucursal){
+    public function ObtenerListadoFactura(){
+        $IdSucursal = Auth::user()->IdSucursal;
          return Datatables::of(DB::select("call SELECT_facturas('$IdSucursal','$IdSucursal')"))->make(true);
     }
 
@@ -223,7 +224,7 @@ class MantenimientoController extends Controller
     public function CambiarPassword(Request $request){
         $name = $request->input('UserName');
         $Pass = bcrypt($request->input('pass'));
-        $guardar  = DB::SELECT(DB::raw("call UPDATE_ContraseñaUsuarios('$Pass','$name')"));
+        $guardar  = DB::statement("call UPDATE_ContraseñaUsuarios('$Pass','$name')");
         return response()->json([
                 "mensaje"=>"Actualizada"
                 ]);

@@ -39,7 +39,7 @@ Route::get('/listadopaciente', 'MantenimientoController@ObtenerListadoPaciente')
 
 Route::get('/factura-listado', 'MantenimientoController@ListadoFactura')->name('ListadoFactura');
 
-Route::get('/listadofactura/{IdSucursal}', 'MantenimientoController@ObtenerListadoFactura')->name('ObtenerListadoFactura');
+Route::get('/listado-factura', 'MantenimientoController@ObtenerListadoFactura')->name('ObtenerListadoFactura');
 
 Route::post('/estado-update-factura', 'MantenimientoController@UpdateEstadoFactura')->name('UpdateEstadoFactura');
 
@@ -117,6 +117,3 @@ Route::get('/pdf/reporte-ganancia/{IdMoneda}/{IdSucursal}/{desde}/{hasta}','Repo
 Route::get('/pdf/factura/{id}','ReporteController@PdfFactura')->name('PdfFactura');
 
 //------------AREA DE EMPLEADO--------------//
-
-
-

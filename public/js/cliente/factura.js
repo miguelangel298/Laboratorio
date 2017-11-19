@@ -67,6 +67,7 @@ $("#ObtenerCliente").click(function(e) {
 		}else{
 			$("#informacion").hide();
 			$("#contenidoFactura").show();
+			$("#contenedorDatos").show();
 			$("#contenedorDatos").html("<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><address><strong>"+data.Nombre+"</strong><br>Cedula: "+data.Cedula+"<br>Correo: "+data.Correo+"</address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'> <address><strong>"+data.IdNacionalidad+"</strong><br>Fecha de Nacimiento<br>"+data.FechaNacimineto+"<br></address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><b>Numero de Seguro:</b><br>#"+data.SeguroMedico+"<br><b>Telefono:</b> "+data.Celular+"<br></div></div><hr> ");
 			$("#IdCliente").val(data.IdPersona);
 		}
@@ -165,12 +166,12 @@ function getSuma() {
 LimpiarFactura = function(){
 $("#dinero,#itbis,#descuentoHtml,#total").html("");
 	descuentoP = 0;
-	$('#Descuento').prop('selectedIndex',0);
-	$('#IdProcedimiento').prop('selectedIndex',0);
+	$("#Descuento").prop('selectedIndex',0);
+	$('#IdPacienteDatos').prop('selectedIndex',0).trigger('change');
+	$('#IdProcedimiento').prop('selectedIndex',0).trigger('change');
 	clearDataTable();
 	procedimientos = [];
 	order = 0;
-
 }
 
 function getCodigos() {
@@ -224,8 +225,8 @@ function showProc(codigo) {
 			proc = pr;
 		}
 	});
-	console.log(order);
-	console.log(procedimientos);
+	// console.log(order);
+	// console.log(procedimientos);
 	showSingleProcedimiento(proc);
 }
 
@@ -266,7 +267,6 @@ function addProcedimiento(res) {
 }
 
 $("#AgregarProcedimiento").click(function(e){
-
 	var routeProcedimiento = "/procemiento-pesos/"+moneda+"/"+IdProcedimiento+"";
 	$.get(routeProcedimiento,function(res){
 		addProcedimiento(res);
@@ -522,13 +522,14 @@ $.ajax({
 				dataType:'JSON',
 				data:{IdFactura:IdFactura,IdProcedimiento:IdProcedimiento},
 					success: function(res){
+						LimpiarFactura();
 					}
 				});
 			});
 
-			var routePrint = "/factura-print/7";
+			var routePrint = "/factura-print/"+IdFactura+"";
 			$.get(routePrint,function(datas){
-				
+
 				var pdfWindows = window.open(",", "");
 				pdfWindows.document.write(datas);
 				pdfWindows.document.close();
@@ -537,7 +538,7 @@ $.ajax({
 				pdfWindows.close();
 			});
 		});
-		
+
 
 		},
 		error:function(res){
@@ -548,9 +549,6 @@ $.ajax({
 }else{
 alertify.error("Vacio");
 }
-
-
-
 });
 
 
@@ -618,13 +616,14 @@ $.ajax({
 				dataType:'JSON',
 				data:{IdFactura:IdFactura,IdProcedimiento:IdProcedimiento},
 					success: function(res){
+						LimpiarFactura();
 					}
 				});
 			});
 
 			var routePrint = "/factura-print/7";
 			$.get(routePrint,function(datas){
-				
+
 				var pdfWindows = window.open(",", "");
 				pdfWindows.document.write(datas);
 				pdfWindows.document.close();
@@ -633,7 +632,7 @@ $.ajax({
 				pdfWindows.close();
 			});
 		});
-		
+
 
 		},
 		error:function(res){
@@ -644,6 +643,5 @@ $.ajax({
 }else{
 alertify.error("Vacio");
 }
-
 });
 });
