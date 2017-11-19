@@ -459,189 +459,107 @@ var array = [];
 
 
 //GENERAL FACTURA
+GenerarFactura =  function(IdTipo) {
+	var IdPersona = $("#IdCliente").val();
+	var IdMoneda =  moneda;
+	var IdTipoPago = IdTipo;
+	var Total = suma;
+	var ItbisC = Itbis;
+	var DescuentoC = Descuento;
+	var TotalPagarC = TotalPagar;
+	var ModificadoPorF = $("#ModificadoPor").val();
+	var route = "/factura-generar";
+
+	if($("#ModificadoPor").val() != ""){
+	$.ajax({
+			url:route,
+			headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+			type:'POST',
+			dataType:'JSON',
+			data:{IdPersona:IdPersona,IdMoneda:IdMoneda,IdTipoPago:IdTipoPago,Total:Total,Itbis:ItbisC,
+				Descuento:DescuentoC,TotalPagar:TotalPagarC,ModificadoPor:ModificadoPorF},
+
+			success: function(res){
+				swal({
+					  title: 'GUARDADO!',
+					  type: 'success',
+					  html:
+					    'Factura Guardado <b>Correctamente </b>. ',
+					  showCloseButton: true,
+					  focusConfirm: false,
+					  confirmButtonText:
+					    '<i class="fa fa-thumbs-up"></i> OK!',
+					  confirmButtonAriaLabel: 'OK!',
+					});
+
+				var array = [];
+			$('.tableid').each(function(index,object){
+				var obj = {};
+				obj['Codigo'] = $($(object).children()[0]).html();
+				array.push(obj);
+
+			});
+				$("#informacion").show();
+				$("#Cedulaid").val("");
+				$("#contenidoFactura").hide();
+				$("#contenedorDatos").hide();
+		//GENERAR DETALLE  DE FACTURA
+			var routeIdF = "/factura-id";
+			var IdFactura = "";
+			$.get(routeIdF,  function(data){
+				 IdFactura = data.IdFactura;
+
+				$(array).each(function(key,value){
+				var IdProcedimiento=value.Codigo
+				var route =  "/factura/detalle/crear";
+					$.ajax({
+					url:route,
+					headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+					type:'POST',
+					dataType:'JSON',
+					data:{IdFactura:IdFactura,IdProcedimiento:IdProcedimiento},
+						success: function(res){
+							LimpiarFactura();
+						}
+					});
+				});
+
+				var routePrint = "/factura-print/"+IdFactura+"";
+				$.get(routePrint,function(datas){
+
+					var pdfWindows = window.open(",", "");
+					pdfWindows.document.write(datas);
+					pdfWindows.document.close();
+					pdfWindows.focus();
+					pdfWindows.print();
+					pdfWindows.close();
+				});
+			});
+
+			},
+			error:function(res){
+				alertify.error('Error');
+			}
+		});
+
+	}else{
+	alertify.error("Vacio");
+	}
+}
+
+
+$("#GenerarFacturaTarjeta").click(function() {
+	var IdTipo = 2
+	GenerarFactura(IdTipo);
+
+});
 
 $("#GenerarFactura").click(function(){
-
-var IdPersona = $("#IdCliente").val();
-var IdMoneda =  moneda;
-var IdTipoPago = 2;
-var Total = suma;
-var ItbisC = Itbis;
-var DescuentoC = Descuento;
-var TotalPagarC = TotalPagar;
-var ModificadoPorF = $("#ModificadoPor").val();
-var route = "/factura-generar";
-
-if($("#ModificadoPor").val() != ""){
-$.ajax({
-		url:route,
-		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-		type:'POST',
-		dataType:'JSON',
-		data:{IdPersona:IdPersona,IdMoneda:IdMoneda,IdTipoPago:IdTipoPago,Total:Total,Itbis:ItbisC,
-			Descuento:DescuentoC,TotalPagar:TotalPagarC,ModificadoPor:ModificadoPorF},
-
-		success: function(res){
-			swal({
-				  title: 'GUARDADO!',
-				  type: 'success',
-				  html:
-				    'Factura Guardado <b>Correctamente </b>. ',
-				  showCloseButton: true,
-				  focusConfirm: false,
-				  confirmButtonText:
-				    '<i class="fa fa-thumbs-up"></i> OK!',
-				  confirmButtonAriaLabel: 'OK!',
-				});
+var IdTipo = 1
+GenerarFactura(IdTipo);
 
 
-			var array = [];
-		$('.tableid').each(function(index,object){
-			var obj = {};
-			obj['Codigo'] = $($(object).children()[0]).html();
-			array.push(obj);
-
-		});
-			$("#informacion").show();
-			$("#Cedulaid").val("");
-			$("#contenidoFactura").hide();
-			$("#contenedorDatos").hide();
-	//GENERAR DETALLE  DE FACTURA
-		var routeIdF = "/factura-id";
-		var IdFactura = "";
-		$.get(routeIdF,  function(data){
-			 IdFactura = data.IdFactura;
-
-			$(array).each(function(key,value){
-			var IdProcedimiento=value.Codigo
-			var route =  "/factura/detalle/crear";
-				$.ajax({
-				url:route,
-				headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-				type:'POST',
-				dataType:'JSON',
-				data:{IdFactura:IdFactura,IdProcedimiento:IdProcedimiento},
-					success: function(res){
-						LimpiarFactura();
-					}
-				});
-			});
-
-			var routePrint = "/factura-print/"+IdFactura+"";
-			$.get(routePrint,function(datas){
-
-				var pdfWindows = window.open(",", "");
-				pdfWindows.document.write(datas);
-				pdfWindows.document.close();
-				pdfWindows.focus();
-				pdfWindows.print();
-				pdfWindows.close();
-			});
-		});
-
-
-		},
-		error:function(res){
-			alertify.error('Error');
-		}
-	});
-
-}else{
-alertify.error("Vacio");
-}
 });
 
-
-//GENERAL FACTURA
-
-$("#GenerarTarjeta").click(function(){
-
-var IdPersona = $("#IdCliente").val();
-var IdMoneda =  moneda;
-var IdTipoPago = 2;
-var Total = suma;
-var ItbisC = Itbis;
-var DescuentoC = Descuento;
-var TotalPagarC = TotalPagar;
-var ModificadoPorF = $("#ModificadoPor").val();
-var route = "/factura-generar";
-
-if($("#ModificadoPor").val() != ""){
-$.ajax({
-		url:route,
-		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-		type:'POST',
-		dataType:'JSON',
-		data:{IdPersona:IdPersona,IdMoneda:IdMoneda,IdTipoPago:IdTipoPago,Total:Total,Itbis:ItbisC,
-			Descuento:DescuentoC,TotalPagar:TotalPagarC,ModificadoPor:ModificadoPorF},
-
-		success: function(res){
-			swal({
-				  title: 'GUARDADO!',
-				  type: 'success',
-				  html:
-				    'Factura Guardado <b>Correctamente </b>. ',
-				  showCloseButton: true,
-				  focusConfirm: false,
-				  confirmButtonText:
-				    '<i class="fa fa-thumbs-up"></i> OK!',
-				  confirmButtonAriaLabel: 'OK!',
-				});
-
-
-			var array = [];
-		$('.tableid').each(function(index,object){
-			var obj = {};
-			obj['Codigo'] = $($(object).children()[0]).html();
-			array.push(obj);
-
-		});
-			$("#informacion").show();
-			$("#Cedulaid").val("");
-			$("#contenidoFactura").hide();
-			$("#contenedorDatos").hide();
-	//GENERAR DETALLE  DE FACTURA
-		var routeIdF = "/factura-id";
-		var IdFactura = "";
-		$.get(routeIdF,  function(data){
-			 IdFactura = data.IdFactura;
-
-			$(array).each(function(key,value){
-			var IdProcedimiento=value.Codigo
-			var route =  "/factura/detalle/crear";
-				$.ajax({
-				url:route,
-				headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-				type:'POST',
-				dataType:'JSON',
-				data:{IdFactura:IdFactura,IdProcedimiento:IdProcedimiento},
-					success: function(res){
-						LimpiarFactura();
-					}
-				});
-			});
-
-			var routePrint = "/factura-print/7";
-			$.get(routePrint,function(datas){
-
-				var pdfWindows = window.open(",", "");
-				pdfWindows.document.write(datas);
-				pdfWindows.document.close();
-				pdfWindows.focus();
-				pdfWindows.print();
-				pdfWindows.close();
-			});
-		});
-
-
-		},
-		error:function(res){
-			alertify.error('Error');
-		}
-	});
-
-}else{
-alertify.error("Vacio");
-}
 });
-});
+
