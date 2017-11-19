@@ -187,9 +187,9 @@ Laboratorio | Factura
      <div class="row no-print">
         <div class="col-xs-12">
           <!-- <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
-          <button type="button" id="GenerarTarjeta" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Pago por Tarjeta
+          <button type="button"  id="GenerarFacturaTarjeta" class="GenerarFactura btn btn-success pull-right"><i class="fa fa-credit-card"></i> Pago por Tarjeta
           </button>
-          <button type="button" id="GenerarFactura" class="btn btn-primary pull-right" style="margin-right: 5px;">
+          <button type="button"  id="GenerarFactura"  class="GenerarFactura btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Generar
           </button>
         </div>

@@ -1,9 +1,6 @@
 $(document).ready(function(){
-
-
-
 	listadoProcedimiento = function(){
-	$("#TablaProcedimiento").DataTable({	
+	$("#TablaProcedimiento").DataTable({
 		destroy: true,
 		   "language": {
 					"sProcessing":     "Cargando...",
@@ -49,14 +46,14 @@ $(document).ready(function(){
 		 		render: function(data, type, row){
 		 			return "<td>US$ "+data+"</td>"
 		 			}
-		 		},	
+		 		},
 		 		{data: 'IdProcedimiento',
 		 			render: function(data, type, row){
 		 				return "<tr class='text-center'><button data-toggle='modal' data-target='#modal-default' title='Editar' onclick='Editar(this);' value="+data+"  style='background-color:#fff;'  class='btn btn-primary'><i style='color:#114C7F; width:17px;' class='fa  fa-pencil' aria-hidden='true'></i></button></tr>"
 		 			}
-		 		}	 		              
+		 		}
 			]
-	
+
 	});
 }
 listadoProcedimiento();
@@ -67,7 +64,7 @@ listadoProcedimiento();
 		$("#Nombre,#CostoPeso,#CostoDolar").val("");
 		$("#DivN,#DivT,#DivCl").removeClass('has-error');
 	}
- 
+
 $("#AgregarProcedimiento").click(function(e){
 	e.preventDefault();
 	var Nombre = $("#Nombre").val();
@@ -81,7 +78,7 @@ $("#AgregarProcedimiento").click(function(e){
 		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		type:'POST',
 		dataType:'JSON',
-		data:{Nombre:Nombre,CostoPeso:CostoPeso,IdUser:IdUser,CostoDolar:CostoDolar},		
+		data:{Nombre:Nombre,CostoPeso:CostoPeso,IdUser:IdUser,CostoDolar:CostoDolar},
 		success: function(res){
 			listadoProcedimiento();
 			swal({
@@ -89,18 +86,18 @@ $("#AgregarProcedimiento").click(function(e){
 				  type: 'success',
 				  html:
 				    'Procedimiento Guardado <b>Correctamente </b>. ',
-				  showCloseButton: true,			  
+				  showCloseButton: true,
 				  focusConfirm: false,
 				  confirmButtonText:
 				    '<i class="fa fa-thumbs-up"></i> OK!',
-				  confirmButtonAriaLabel: 'OK!',				 
-				});		
+				  confirmButtonAriaLabel: 'OK!',
+				});
 			Limpiar();
 		},
 		error:function(res){
 			alertify.error('Error');
-		}	 
-	});	
+		}
+	});
 	}else{
 		var errores ="";
 		if($("#Nombre").val()==""){
@@ -137,8 +134,8 @@ $("#AgregarProcedimiento").click(function(e){
 			alertify.error(errores);
 		}
 	}
-		
-	
+
+
 });
 var IdProcedimiento ="";
 Editar = function(btn){
@@ -149,8 +146,6 @@ Editar = function(btn){
 		$("#CostoDolarE").val(data.Dolar);
 		IdProcedimiento= btn.value;
 	});
-
-	console.log(btn);
 }
 
 //ACTUALIZAR PROCEDIMIENTO--------------------------------------
@@ -168,7 +163,7 @@ $("#ActualizarProcedimiento").click(function(e){
 		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		type:'POST',
 		dataType:'JSON',
-		data:{Nombre:Nombre,CostoPeso:CostoPeso,IdUser:IdUser,CostoDolar:CostoDolar,IdProcedimiento:IdProcedimiento},		
+		data:{Nombre:Nombre,CostoPeso:CostoPeso,IdUser:IdUser,CostoDolar:CostoDolar,IdProcedimiento:IdProcedimiento},
 		success: function(res){
 			listadoProcedimiento();
 			swal({
@@ -176,19 +171,19 @@ $("#ActualizarProcedimiento").click(function(e){
 				  type: 'success',
 				  html:
 				    'Procedimiento Actualizado <b>Correctamente </b>, ',
-				  showCloseButton: true,			  
+				  showCloseButton: true,
 				  focusConfirm: false,
 				  confirmButtonText:
 				    '<i class="fa fa-thumbs-up"></i> OK!',
-				  confirmButtonAriaLabel: 'OK!',				 
-				});		
+				  confirmButtonAriaLabel: 'OK!',
+				});
 			$("#modal-default").modal('toggle'),
 			Limpiar();
 		},
 		error:function(res){
 			alertify.error('Error');
-		}	 
-	});	
+		}
+	});
 	}else{
 		var errores ="";
 		if($("#NombreE").val()==""){
@@ -225,9 +220,6 @@ $("#ActualizarProcedimiento").click(function(e){
 			alertify.error(errores);
 		}
 	}
-		
-	
 });
-
 
 });
