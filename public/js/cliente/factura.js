@@ -536,7 +536,6 @@ GenerarFactura =  function(IdTipo) {
 				});
 			});
 
-
 			},
 			error:function(res){
 				alertify.error('Error');
@@ -548,16 +547,19 @@ GenerarFactura =  function(IdTipo) {
 	}
 }
 
+
 $("#GenerarFacturaTarjeta").click(function() {
 	var IdTipo = 2
 	GenerarFactura(IdTipo);
+
 });
 
 $("#GenerarFactura").click(function(){
 var IdTipo = 1
 GenerarFactura(IdTipo);
 
-});
-
 
 });
+
+});
+
