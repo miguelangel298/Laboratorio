@@ -8,16 +8,20 @@ Laboratorio | Sucursales
 <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script type="text/javascript" src="/js/mantenimiento/sucursales.js"></script>
 @endsection
+
+@section('modals')
+  @include('admin.mantenimiento.Modales.EditarProcedimiento')
+@endsection
+
 @section('content')
 
-@include('admin.mantenimiento.Modales.EditarProcedimiento')
 <section class="content-header">
       <h1>
        Sucursales
         <small>Mantenimiento</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-bullseye"></i> Inicio</a></li>
+        <li><a  href="/"><i  class="fa fa-bullseye"></i> Inicio</a></li>
         <li class="active">Empresa</li>
       </ol>
 </section><br>
@@ -38,7 +42,7 @@ Laboratorio | Sucursales
         <!-- /.box-header -->
         <div class="box-body">
           <div class="row">
-           {!! Form::open(['url'=>'/','method'=>'POST']) !!}
+
             <div class="col-md-6">
                <div class="form-group">
                 <label>Nombre:</label>
@@ -111,11 +115,14 @@ Laboratorio | Sucursales
           <!-- /.row -->
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
-         <button  id="CrearEmpresa" type="submit" class="btn btn-primary pull-right"> Guardar</button>
+        <div class="box-footer row col-md-12" style="margin: 0 !important;">
+          <div class="pull-right">
+            <button  id="Cancelar" onclick="cancelar();" type="button" class="btn btn-danger"> Guardar</button>
+            <button  id="Actualizar" type="button" class="btn btn-primary"> Actualizar</button>
+            <button  id="CrearEmpresa" type="button" class="btn btn-primary"> Guardar</button>
+          </div>
         </div>
 		</div>
-   {!! Form::close() !!}
 			</div>
 		</div>
 

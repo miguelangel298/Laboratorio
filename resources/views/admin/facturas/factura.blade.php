@@ -8,9 +8,12 @@ Laboratorio | Factura
 <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script type="text/javascript" src="/js/cliente/factura.js"></script>
 @endsection
-@section('content')
 
-@include('admin.mantenimiento.Modales.AgregarCliente')
+@section('modals')
+  @include('admin.mantenimiento.Modales.AgregarCliente')
+@endsection
+
+@section('content')
 <section class="content-header">
       <h1>
        Factura

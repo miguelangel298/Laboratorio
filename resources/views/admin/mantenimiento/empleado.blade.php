@@ -8,6 +8,11 @@ Laboratorio | Empleado
 <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script src="/js/mantenimiento/empleado.js"></script>
 @endsection
+
+@section('modals')
+  @include('admin.mantenimiento.Modales.cambiarcontraseña')
+@endsection
+
 @section('content')
 <section class="content-header">
       <h1>
@@ -20,7 +25,6 @@ Laboratorio | Empleado
       </ol>
 </section><br>
 
-@include('admin.mantenimiento.Modales.cambiarcontraseña')
 
 <section class="content">
       <div class="row">
