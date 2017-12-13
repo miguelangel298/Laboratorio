@@ -253,6 +253,8 @@
 <script type="text/javascript" src="/iCheck/icheck.min.js"></script>
 <script src="/js/demo.js"></script>
 <script src="/js/datatime/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/vue.min.js" charset="utf-8"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @yield('script')
 
 

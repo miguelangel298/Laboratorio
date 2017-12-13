@@ -61,7 +61,7 @@ listadoProcedimiento();
 
 
 	Limpiar = function(){
-		$("#Nombre,#CostoPeso,#CostoDolar").val("");
+		$("#Nombre,#CostoPeso").val("");
 		$("#DivN,#DivT,#DivCl").removeClass('has-error');
 	}
 
@@ -70,15 +70,14 @@ $("#AgregarProcedimiento").click(function(e){
 	var Nombre = $("#Nombre").val();
 	var CostoPeso = $("#CostoPeso").val();
 	var IdUser = $("#IdUser").val();
-	var CostoDolar = $("#CostoDolar").val();
 	var route = "/mantenimiento/procedimiento/nuevo";
-	if($("#Nombre").val() != "" && $("#CostoPeso").val() != "" && $("#CostoDolar").val() != "" ){
+	if($("#Nombre").val() != "" && $("#CostoPeso").val() != ""){
 		$.ajax({
 		url:route,
 		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		type:'POST',
 		dataType:'JSON',
-		data:{Nombre:Nombre,CostoPeso:CostoPeso,IdUser:IdUser,CostoDolar:CostoDolar},
+		data:{Nombre:Nombre,CostoPeso:CostoPeso,IdUser:IdUser},
 		success: function(res){
 			listadoProcedimiento();
 			swal({
@@ -120,16 +119,6 @@ $("#AgregarProcedimiento").click(function(e){
 			$("#DivCl").removeClass('has-error');
 		}
 
-		if($("#CostoDolar").val()==""){
-			$("#DivT").addClass('has-error');
-			if(errores!=""){errores+="* Monto US$.<hr>";
-			}else{
-				errores+="* Monto US$.<hr>";
-			}
-		}else{
-			$("#DivT").removeClass('has-error');
-		}
-
 		if(errores!=""){
 			alertify.error(errores);
 		}
@@ -143,7 +132,6 @@ Editar = function(btn){
 	$.get(EditarPorc, function(data){
 		$("#NombreE").val(data.Procedimiento);
 		$("#CostoPesoE").val(data.Peso);
-		$("#CostoDolarE").val(data.Dolar);
 		IdProcedimiento= btn.value;
 	});
 }
@@ -155,15 +143,14 @@ $("#ActualizarProcedimiento").click(function(e){
 	var Nombre = $("#NombreE").val();
 	var CostoPeso = $("#CostoPesoE").val();
 	var IdUser = $("#IdUser").val();
-	var CostoDolar = $("#CostoDolarE").val();
 	var route = "/mantenimiento/procedimiento/editar";
-	if($("#NombreE").val() != "" && $("#CostoPesoE").val() != "" && $("#CostoDolarE").val() != "" ){
+	if($("#NombreE").val() != "" && $("#CostoPesoE").val() != ""){
 		$.ajax({
 		url:route,
 		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		type:'POST',
 		dataType:'JSON',
-		data:{Nombre:Nombre,CostoPeso:CostoPeso,IdUser:IdUser,CostoDolar:CostoDolar,IdProcedimiento:IdProcedimiento},
+		data:{Nombre:Nombre,CostoPeso:CostoPeso,IdUser:IdUser,IdProcedimiento:IdProcedimiento},
 		success: function(res){
 			listadoProcedimiento();
 			swal({
@@ -204,16 +191,6 @@ $("#ActualizarProcedimiento").click(function(e){
 			}
 		}else{
 			$("#DivClE").removeClass('has-error');
-		}
-
-		if($("#CostoDolarE").val()==""){
-			$("#DivTE").addClass('has-error');
-			if(errores!=""){errores+="* Monto US$.<hr>";
-			}else{
-				errores+="* Monto US$.<hr>";
-			}
-		}else{
-			$("#DivTE").removeClass('has-error');
 		}
 
 		if(errores!=""){

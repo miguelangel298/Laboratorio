@@ -33,7 +33,7 @@ Laboratorio | Reporte Factura
           <div class="row">
             <div class="col-md-3 col-md-offset-4 ">
               <div id="DivS">
-              <form>
+              <form id="BuscarFacturaForm">
               <div class="form-group ">
                   <input type="number"  id="IdFactura" class="form-control" placeholder="Nº Factura" name="Factura" >
                 </div>
@@ -43,7 +43,7 @@ Laboratorio | Reporte Factura
         </div>
         <!-- /.box-body -->
         <div class="box-footer ">
-         <button type="button"  id="BuscarFactura" type="submit" class="btn btn-primary pull-right"> Buscar</button>
+         <button type="submit"  id="BuscarFactura" class="btn btn-primary pull-right"> Buscar</button>
         </div>
           </form>
 	</div>

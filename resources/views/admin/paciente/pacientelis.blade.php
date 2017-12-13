@@ -26,7 +26,7 @@ Laboratorio | Paciente
               <h3 class="box-title">Listado Paciente</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsives">
+            <div class="box-body table-responsive">
               <table id="TablaPaciente" width="100%" class="table table-bordered table-striped">
                 <thead>
                 <tr>
