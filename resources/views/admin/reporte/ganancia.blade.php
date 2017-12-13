@@ -2,12 +2,13 @@
 @section('title')
 Laboratorio | Reporte Ganancia
 @endsection
-@section('content')
-
+@section('script')
 <script type="text/javascript" src="/iCheck/icheck.min.js"></script>
 
+@endsection
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
+
+@section('content')
 <section class="content-header">
       <h1>
        Reporte

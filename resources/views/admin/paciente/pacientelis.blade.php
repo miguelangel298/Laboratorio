@@ -5,8 +5,10 @@ Laboratorio | Paciente
 @section('script')
 <script type="text/javascript" src="/js/cliente/paciente.js"></script>
 @endsection
+@section('modals')
+  @include('admin.mantenimiento.Modales.EditarPaciente')
+@endsection
 @section('content')
-@include('admin.mantenimiento.Modales.EditarPaciente')
 <section class="content-header">
       <h1>
        Paciente
