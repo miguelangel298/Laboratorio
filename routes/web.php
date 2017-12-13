@@ -72,6 +72,10 @@ Route::post('/mantenimiento/empresa/crear', 'MantenimientoController@CrearEmpres
 
 Route::get('/mantenimiento/empresa/listado', 'MantenimientoController@EmpresaListado')->name('EmpresaListado');
 
+Route::get('/mantenimiento/sucursal-edit/{id}', 'MantenimientoController@mostrarSucursalPorId')->name('mostrarSucursalPorId');
+
+Route::post('/update-sucursal', 'MantenimientoController@editarSucursalPorId')->name('editarSucursalPorId');
+
 // Route::get('/mantenimiento/empleado/listado', 'MantenimientoController@EmpleadoListado')->name('EmpleadoListado');
 
 Route::get('/listado-empleado', 'MantenimientoController@EmpleadoListado')->name('EmpleadoListado');

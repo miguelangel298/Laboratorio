@@ -32,12 +32,12 @@ class MantenimientoController extends Controller
     }
 
     public function ObtenerCliente(){
-    	$Obtener = DB::select("SELECT MAX(Idpersona) as Idpersona from Personas");
+    	$Obtener = DB::select("SELECT MAX(Idpersona) as Idpersona from personas");
 		return Response()->json($Obtener[0]);
     }
 
     public function CrearPaciente(Request $request){
-        Paciente::create($request->all());
+      $creacion =  Paciente::create($request->all());
             return response()->json([
                 "mensaje"=>"Creado"
                 ]);
@@ -176,10 +176,47 @@ class MantenimientoController extends Controller
     }
 
      public function EmpresaListado(){
-     $listado = DB::SELECT("SELECT s.Codigo, s.Nombre, s.AnoApertura,s.Direccion, if(s.Estado = 1,'ACTIVA','NO ACTIVA') AS Estado
+     $listado = DB::SELECT("SELECT s.Codigo, s.Nombre, s.AnoApertura,s.Direccion, if(s.Estado = 1,'ACTIVA','NO ACTIVA') AS Estado, s.IdSucursal
                                     from sucursales as s
                                     order by s.IdSucursal desc ");
         return Response()->json($listado);
+    }
+
+    public function mostrarSucursalPorId($id){
+      $sucursal = DB::select("select * from sucursales where IdSucursal = '$id'");
+      if(count($sucursal) == 0){
+        return;
+      }
+      return Response()->json($sucursal[0]);
+    }
+
+    public function editarSucursalPorId(Request $request){
+      $IdSucursal = $request->input('IdSucursal');
+      $Nombre = $request->input('Nombre');
+      $AnoApertura = $request->input('AnoApertura');
+      $Codigo = $request->input('Codigo');
+      $Telefono = $request->input('Telefono');
+      $Direccion = $request->input('Direccion');
+      $Estado = $request->input('Estado');
+      $IdMunicipio = $request->input('IdMunicipio');
+
+      $fields = [
+        'Nombre' => $Nombre,
+        'AnoApertura' => $AnoApertura,
+        'Codigo' => $Codigo,
+        'Telefono' => $Telefono,
+        'Direccion' => $Direccion,
+        'Estado' => $Estado,
+        'IdMunicipio' => $IdMunicipio
+      ];
+
+      $aja = Empresa::find($IdSucursal);
+			$aja->fill($fields);
+			$aja->save();
+		return response()->json([
+				"mensaje"=>"Actualizado"
+				]);
+
     }
 
     public function ListadoPaciente(){

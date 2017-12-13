@@ -5,9 +5,13 @@ Laboratorio | Procedimientos
 @section('script')
 <script type="text/javascript" src="/js/mantenimiento/procedimiento.js"></script>
 @endsection
+
+@section('modals')
+  @include('admin.mantenimiento.Modales.EditarProcedimiento')
+@endsection
+
 @section('content')
 
-@include('admin.mantenimiento.Modales.EditarProcedimiento')
 <section class="content-header">
       <h1>
        Procedimiento

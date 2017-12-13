@@ -354,7 +354,7 @@ $("#ActualizarEmpleado").click(function(e){
 				Limpiar();
 			},
 			error:function(res){
-				alertify.error('Error');
+				console.log('Error');
 			}
 		});
     }else{
