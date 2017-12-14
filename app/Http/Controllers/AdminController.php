@@ -5,6 +5,7 @@ namespace Laboratorio\Http\Controllers;
 use Illuminate\Http\Request;
 use Laboratorio\Personas;
 use Laboratorio\DetalleFactura;
+use Laboratorio\Divisas;
 use DB;
 use Auth;
 class AdminController extends Controller
@@ -93,4 +94,32 @@ class AdminController extends Controller
 
         return Response()->json($procedimientos[0]);
     }
+
+    public function updateDivisa(Request $request){
+      $IdDivisa = $request->input('IdDivisa');
+      $Valor = $request->input('Valor');
+
+      $fields = [
+        'Valor' => $Valor
+      ];
+
+      $update = Divisas::find($IdDivisa);
+			$update->fill($fields);
+			$update->save();
+  		return response()->json([
+  				"mensaje"=>"Actualizado"
+  				]);
+    }
+
+    public function obtenerActualDivisa($id) {
+      $IdDivisa = $id;
+      $divisa = Divisas::find($IdDivisa);
+      return response()->json($divisa);
+    }
+
+    public function ObtenerIngresosUltimoAnio() {
+      $datos = DB::select('CALL SELECT_IngresosUltimoAnio()');
+      return response()->json($datos);
+    }
+
 }
