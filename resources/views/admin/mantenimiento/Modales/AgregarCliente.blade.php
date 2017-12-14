@@ -1,5 +1,5 @@
 
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+<div id="agregarClienteModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -75,7 +75,7 @@
                   </div>
                 </div>
               </div>
-             
+
             </div>
             <div class="col-md-6">
                <div class="form-group">

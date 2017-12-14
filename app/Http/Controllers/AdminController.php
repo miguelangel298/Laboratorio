@@ -44,7 +44,7 @@ class AdminController extends Controller
 
     public function IdFacturaMax(){
         $datos = DB::SELECT("SELECT max(factura.IdFactura) as IdFactura from factura");
-       return Response()->json($datos[0]);
+       return response()->json($datos[0]);
     }
 
     public function CrearFactura(Request $request){
@@ -55,15 +55,28 @@ class AdminController extends Controller
         $Itbis = $request->input('Itbis');
         $Descuento = $request->input('Descuento');
         $TotalPagar = $request->input('TotalPagar');
-        $ModificadoPor = $request->input('ModificadoPor');
+        $ModificadoPor = Auth::user()->IdPersona;
         $IdSucursal = Auth::user()->IdSucursal;
+        $monto = $request->input('Monto');
         $guardar  = DB::SELECT(DB::raw("CALL INSERT_Factura('$IdPersona','$IdMoneda','$IdTipoPago' ,'$Total','$Itbis','$Descuento','$TotalPagar','$ModificadoPor','$IdSucursal')"));
+
+        if($monto != ""){
+          $IdFactura = DB::SELECT("SELECT max(factura.IdFactura) as IdFactura from factura");
+          $IdFacturaId = $IdFactura[0]->IdFactura;
+          $this->abonoFactura($IdFacturaId,$monto);
+        }
+
         return response()->json([
                 "mensaje"=>"Creado"
                 ]);
         }
 
-
+        public function abonoFactura($IdFactura,$monto){
+          $abono = DB::statement("call INSERT_AbonoFactura('$IdFactura','$monto')");
+          // return response()->json([
+          //         "mensaje"=>"Creado"
+          //         ]);
+        }
 
 
     public function DatosFacturaCliente($cedula){
