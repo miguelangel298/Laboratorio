@@ -37,12 +37,12 @@ $(document).ready(function(){
         ],
 		 	"columns":[
 		 		{data: 'Procedimiento'},
-		 		{data: "Peso",
+		 		{data: "RD$",
 		 		render: function(data, type, row){
 		 			return "<td>RD$ "+data+"</td>"
 		 			}
 		 		},
-		 		{data: "Dolar",
+		 		{data: "US$",
 		 		render: function(data, type, row){
 		 			return "<td>US$ "+data+"</td>"
 		 			}

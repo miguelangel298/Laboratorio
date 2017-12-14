@@ -92,15 +92,7 @@ class MantenimientoController extends Controller
 
 
     public function ListadoProcedimiento(){
-    	return Datatables::of(DB::select('SELECT T.Nombre as Procedimiento, T.Costo as Peso,T2.Costo as Dolar, T.IdProcedimiento
-											FROM	(SELECT procedimientos.IdProcedimiento,procedimientos.Nombre, costos.Costo
-													FROM 	procedimientos inner JOIN
-															costos on costos.IdProcedimiento=procedimientos.IdProcedimiento
-													WHERE	 costos.IdMoneda=1) T inner JOIN
-										    (SELECT procedimientos.IdProcedimiento,procedimientos.Nombre, costos.Costo
-													FROM 	procedimientos inner JOIN
-															costos on costos.IdProcedimiento=procedimientos.IdProcedimiento
-													WHERE	 costos.IdMoneda=2) T2 on T.IdProcedimiento=T2.IdProcedimiento'))->make(true);
+    	return Datatables::of(DB::select("call SELECT_Procedimientos"))->make(true);
     }
 
 

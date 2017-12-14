@@ -121,3 +121,12 @@ Route::get('/pdf/reporte-ganancia/{IdMoneda}/{IdSucursal}/{desde}/{hasta}','Repo
 Route::get('/pdf/factura/{id}','ReporteController@PdfFactura')->name('PdfFactura');
 
 //------------AREA DE EMPLEADO--------------//
+
+
+
+// -------------- INICIO -------------------//
+Route::get('/divisas/valor/{id}', 'AdminController@obtenerActualDivisa')->name('ObtenerValorDivisa');
+
+Route::post('/divisas/actualizar', 'AdminController@updateDivisa')->name('UpdateValorDivisa');
+
+Route::get('/chart/ingresos', 'AdminController@ObtenerIngresosUltimoAnio')->name('ObtenerIngresosUltimoAnio');
