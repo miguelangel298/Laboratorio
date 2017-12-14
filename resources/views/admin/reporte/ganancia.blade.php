@@ -3,10 +3,8 @@
 Laboratorio | Reporte Ganancia
 @endsection
 @section('script')
-<script type="text/javascript" src="/iCheck/icheck.min.js"></script>
-
+<script type="text/javascript" src="/js/reporte/ganancia.js"></script>
 @endsection
-
 
 @section('content')
 <section class="content-header">
@@ -134,8 +132,5 @@ Laboratorio | Reporte Ganancia
 </div>
   </div>
 </div>
-<script type="text/javascript" src="/js/reporte/ganancia.js"></script>
-<link rel="stylesheet" type="text/css" href="/js/sweetalert/sweetalert2.min.css">
-<script type="text/javascript" src="/js/sweetalert/sweetalert2.min.js"></script>
 
 @endsection

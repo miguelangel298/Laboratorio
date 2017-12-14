@@ -39,7 +39,7 @@ Laboratorio | Procedimientos
         <div class="box-body">
           <div class="row">
            {!! Form::open(['url'=>'/mantenimiento/procedimiento/nuevo','method'=>'POST']) !!}
-            <div class="col-md-12">
+            <div class="col-md-8">
             <input type="hidden"  name="IdUser" id="IdUser" value="{{ Auth::user()->IdUser }}">
                <div class="form-group">
                 <label>Procedimiento:</label>
@@ -53,7 +53,7 @@ Laboratorio | Procedimientos
                 </div>
               </div>
             </div>
-			     <div class="col-md-6">
+			     <div class="col-md-4">
                <div class="form-group">
                 <label>Costo en Pesos:</label>
                 <div class="input-group">
@@ -66,7 +66,7 @@ Laboratorio | Procedimientos
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <div class="form-group">
                 <label>Costo en Dollar:</label>
                 <div class="input-group">
@@ -76,10 +76,10 @@ Laboratorio | Procedimientos
                   <div id="DivT">
                      <input type="text" id="CostoDolar"   class="form-control" placeholder="Costo en Dollar" name="CostoDolar">
                   </div>
-                </div>
+                </div> -->
                 <!-- /.input group -->
-              </div>
-          </div>
+              <!-- </div>
+          </div> -->
           <!-- /.row -->
         </div>
         <!-- /.box-body -->

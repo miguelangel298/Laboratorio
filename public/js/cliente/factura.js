@@ -1,5 +1,13 @@
 $("#contenidoFactura").hide();
 $(document).ready(function($) {
+
+$('#IdPacienteDatos').click(function () {
+	$('#livesearch').removeClass('hide');
+	$('#livesearch').addClass('show');
+
+});
+
+
 var date = "";
 var f=new Date();
 var m2 = f.getMonth() + 1;
@@ -17,7 +25,6 @@ $("#FechaUp").html(date);
 
 $("#IdProcedimiento").select2();
 
-$("#IdPacienteDatos").select2();
 	var moneda = 1;
 	$("input[name=metododinero]").change(function () {
 		moneda = $(this).val();
@@ -32,11 +39,7 @@ $("#IdPacienteDatos").select2();
 		});
 		});
 
-$("#ObtenerCliente").click(function(e) {
-
-	e.preventDefault();
-
-	//var Cedulaid = $("#Cedulaid").val();
+ObtenerCliente = function (IdPacienteDatos) {
 	var RutaDatos = "/factura/cliente/datos/"+IdPacienteDatos+"";
 	$.get(RutaDatos, function(data) {
 		if (data.Error == 'Funciona') {
@@ -72,7 +75,18 @@ $("#ObtenerCliente").click(function(e) {
 			$("#IdCliente").val(data.IdPersona);
 		}
 	});
-	});
+}
+
+// $("#ObtenerCliente").click(function(e) {
+//
+// 	e.preventDefault();
+// 	ObtenerCliente(IdPacienteDatos);
+// 	//var Cedulaid = $("#Cedulaid").val();
+//
+// });
+
+
+
 	$('[data-mask]').inputmask();
     //Date picker
     $('#FechaNacimineto').datepicker({
@@ -560,4 +574,62 @@ GenerarFactura(IdTipo);
 });
 
 
+});
+
+
+Vue.prototype.$http = axios;
+
+let app = new Vue({
+	el: '#app-paciente',
+	data: {
+		searchQuery: '',
+		pacientes: [],
+		busqueda: [],
+		currentPaciente: {},
+	},
+	mounted: function () {
+		this.fetchPacientes();
+	},
+	watch: {
+		searchQuery: function (newVal) {
+			if (newVal && this.pacientes) {
+				this.busqueda = this.pacientes.filter(function (paciente) {
+					paciente.Nombres = paciente.Nombres || '';
+					paciente.Apellidos = paciente.Apellidos || '';
+					paciente.Cedula = paciente.Cedula || '';
+					return paciente.Nombres.toLowerCase().includes(newVal.toLowerCase().trim()) ||
+					paciente.Apellidos.toLowerCase().includes(newVal.toLowerCase().trim()) ||
+					paciente.Cedula.toLowerCase().includes(newVal.toLowerCase().trim());
+				});
+			} else {
+				this.busqueda = this.pacientes;
+			}
+		},
+	},
+	methods: {
+		fetchPacientes: function () {
+			var app = this;
+			this.$http.get('/listadopaciente')
+			.then(function (response) {
+				app.pacientes = response.data.data;
+				app.busqueda = app.pacientes;
+			}).catch(function (err) {
+				console.log(err);
+			});
+		},
+		setCurrent: function (paciente) {
+			this.searchQuery = paciente.Nombres + ' ' + paciente.Apellidos + ' (' + paciente.Cedula + ')';
+			this.currentPaciente = paciente;
+			$('#livesearch').toggleClass('hide show');
+			ObtenerCliente(paciente.Idpersona);
+			this.currentPaciente = {};
+			// set vue
+		},
+		getCurrentPaciente: function () {
+			$('#livesearch').toggleClass('hide show');
+				paciente = this.busqueda[0];
+				ObtenerCliente(paciente.Idpersona);
+				this.searchQuery = paciente.Nombres + ' ' + paciente.Apellidos + ' (' + paciente.Cedula + ')';
+		}
+	}
 });

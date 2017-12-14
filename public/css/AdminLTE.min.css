@@ -45,10 +45,37 @@
 }
 
 .paymentWrap .paymentBtnGroup .paymentMethod .method.visa {
-	background-image: url("https://catwizard-resources.s3.amazonaws.com/users/massalud/assets/header/band_rep_dom.png");
+	background-image: url("/imagen/band_rep_dom.png");
 	}
 
 .paymentWrap .paymentBtnGroup .paymentMethod .method.master-card {
-	background-image: url("https://vignette4.wikia.nocookie.net/una-corte-de-rosas-y-espinas/images/f/f2/Bandera_US_icon.png/revision/latest?cb=20170416221008&path-prefix=es");
+	background-image: url("/imagen/Bandera_US_icon.png");
 }
 
+[v-cloak], hide {
+  display: none !important;
+}
+
+show {
+  display: inherit !important;
+}
+
+#livesearch {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-width: 100%;
+    max-height: 210px;
+    position: relative;
+    margin: 0;
+    top: -15px;
+    z-index: 1000;
+}
+
+#livesearch > .list-group {
+  margin: 0;
+  padding: 0;
+}
+
+#livesearch > ul > li:hover {
+  background: #f5f5f5;
+}
