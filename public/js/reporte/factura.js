@@ -1,7 +1,8 @@
 $("#ContenedorTabla").hide();
 $(document).ready(function($) {
 
-$("#BuscarFactura").click(function(e){
+
+$("#BuscarFacturaForm").submit(function(e){
 	e.preventDefault();
 	var IdFactura = $("#IdFactura").val();
 	var route = "/reporte/factura/"+IdFactura+"";

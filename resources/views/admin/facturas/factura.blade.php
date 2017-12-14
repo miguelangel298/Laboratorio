@@ -24,7 +24,7 @@ Laboratorio | Factura
         <li class="active">Factura</li>
       </ol>
 </section><br>
-<section class="invoice">
+<section class="invoice" id="app-paciente">
   <input type="hidden" id="ModificadoPor" value="{{ Auth::user()->IdUser}}">
     <!-- title row -->
     <div class="row">
@@ -35,28 +35,34 @@ Laboratorio | Factura
         </h2>
       </div>
        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-        <form>
+        <form role="form"  @submit.prevent="getCurrentPaciente()">
           <div class="form-group">
                 <div class="input-group">
                 <div class="input-group-addon">
                     <i class="fa fa-address-card"></i>
                 </div>
                 <div id="DivC">
-
-                  <select id="IdPacienteDatos" class="form-control select2" style="width: 100%;">
+                  <input type="text" id="IdPacienteDatos"  class="form-control" style="width: 100%;" autocomplete="off" v-model="searchQuery" :disabled="pacientes.length === 0" placeholder="Introduzca un Nombre o Cedula">
+                  <!-- <select id="IdPacienteDatos" class="form-control select2" >
                       <option selected="selected" disabled="">Buscar cliente..</option>
                       @foreach($clientes as $cliente)
                       <option value="{{$cliente->Idpersona}}">{{$cliente->Paciente}}</option>
                       @endforeach
-                  </select>
+                  </select> -->
 
                 </div>
                 </div>
             </div>
+            <div class="row hide" id="livesearch" role="menu">
+              <ul class="list-group">
+                 <li  v-for="(paciente, i) in busqueda" @click="setCurrent(paciente)" class='list-group-item' v-if="i < 5" style='position: relative; font-size:10; cursor: pointer; z-index: 1000;' v-cloak>
+                   @{{ paciente.Nombres }} @{{ paciente.Apellidos }} (@{{ paciente.Cedula }})
+                 </li>
+              </ul>
+            </div>
       </div>
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-
-        <button type="submit" id="ObtenerCliente" class="btn btn-primary">Buscar</button>
+        <button type="submit" value="" @click.prevent="getCurrentPaciente()" id="ObtenerCliente" class="btn btn-primary">Buscar</button>
       </div>
       </form>
       <!-- /.col -->
@@ -142,7 +148,7 @@ Laboratorio | Factura
 
     <div class="row">
       <!-- accepted payments column -->
-      <div class="col-xs-6">
+      <div class="col-md-6">
         <p class="lead text-center">Metodos de Pago:</p>
         <div class="paymentWrap">
       <div class="btn-group paymentBtnGroup btn-group-justified" data-toggle="buttons">
@@ -163,7 +169,7 @@ Laboratorio | Factura
         </p>
       </div>
       <!-- /.col -->
-      <div class="col-xs-6">
+      <div class="col-md-6">
         <div class="table-responsive">
           <table class="table">
             <tr>
