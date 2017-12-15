@@ -122,7 +122,6 @@ EditarEmpleado = function(data){
 
 $("#ActualizarCliente").click(function(e){
 	e.preventDefault();
-	console.log(IdPersona);
 	var Nombres = $("#Nombres").val();
 	var Apellido1 = $("#Apellido1").val();
 	var Apellido2 = $("#Apellido2").val();
@@ -144,6 +143,7 @@ $("#ActualizarCliente").click(function(e){
 			Celular:Celular,Telefono:Telefono,IdPersona:IdPersona,SeguroMedico:SeguroMedico},
 
 		success: function(res){
+			listadoPaciente();
 			$("#EditarPacienteModal").modal("hide");
 			swal({
 				  title: 'ACTUALIZADO!',
