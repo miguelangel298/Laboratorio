@@ -269,6 +269,7 @@ class MantenimientoController extends Controller
         $Apellido1 = $request->input('Apellido1');
         $Apellido2 = $request->input('Apellido2');
         $IdSexo = $request->input('IdSexo');
+        $NumeroSeguro = $request->input('NumeroSeguro');
         $Correo = $request->input('Correo');
         $Cedula = $request->input('Cedula');
         $FechaNacimineto = $request->input('FechaNacimineto');
@@ -277,7 +278,7 @@ class MantenimientoController extends Controller
         $Telefono = $request->input('Telefono');
         $IdPersona = $request->input('IdPersona');
         $SeguroMedico = $request->input('SeguroMedico');
-        $guardar  = DB::SELECT(DB::raw("CALL UPDATE_PersonaPaciente('$Cedula','$Nombres','$Apellido1','$Apellido2','$FechaNacimineto','$IdNacionalidad',' $IdSexo','$Telefono','$Celular','$Correo','$SeguroMedico','$IdPersona')"));
+        $guardar  = DB::SELECT(DB::raw("CALL UPDATE_PersonaPaciente('$Cedula','$Nombres','$Apellido1','$Apellido2','$FechaNacimineto','$IdNacionalidad',' $IdSexo','$Telefono','$Celular','$Correo','$SeguroMedico','$IdPersona', '$NumeroSeguro')"));
         return response()->json([
                 "mensaje"=>"Creado"
                 ]);

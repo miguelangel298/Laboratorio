@@ -37,6 +37,13 @@ IdDivisa = 0;
   });
 
   obtenerUltimoDollar();
+
+  $.get('/pacientes/total', function (res) {
+    $('#PacientesTotalText').html(res.Total);
+  });
+  $.get('/facturas/total', function (res) {
+    $('#FacturasTotalText').html(res.Total);
+  });
 });
 
 function drawBarChart(data) {
@@ -110,7 +117,6 @@ $(function () {
   var route = '/chart/ingresos';
   $.get(route, function (res) {
     SucursalesData = res;
-    console.log(SucursalesData);
     var sucursales = [];
     var cantidades = [];
     var meses = [];
@@ -133,7 +139,6 @@ $(function () {
           }
         });
       });
-      console.log(cantidades);
       data.push({
         label: sucursal,
         data: cantidades,

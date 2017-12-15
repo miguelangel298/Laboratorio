@@ -24,6 +24,7 @@ $(document).ready(function(){
         SeguroMedico = $(this).val();
 	});
 
+
 	Limpiar = function(){
 		$("#Nombres,#Apellidos,#Correo,#Cedula,#FechaNacimineto,#Celular,#Telefono,#Apellido2").val("");
 		$("#DivN,#DivA,#DivS,#DivE,#DivC,#DivF,#DivNc,#DivSG,#DivCl,#DivSP").removeClass('has-error');
@@ -34,7 +35,7 @@ $(document).ready(function(){
 		IdNacionalidad = "";
 		SeguroMedico = "";
 	}
- 
+
 $("#AgregarCliente").click(function(e){
 	e.preventDefault();
 	var Nombres = $("#Nombres").val();
@@ -43,6 +44,7 @@ $("#AgregarCliente").click(function(e){
 	var IdUser = $("#IdUser").val();
 	var Correo = $("#Correo").val();
 	var Cedula = $("#Cedula").val();
+	var NumeroSeguro = $("#NumeroSeguro").val();
 	var FechaNacimineto = $("#FechaNacimineto").val();
 	var Celular = $("#Celular").val();
 	var Telefono = $("#Telefono").val();
@@ -56,21 +58,21 @@ $("#AgregarCliente").click(function(e){
 		data:{Nombres:Nombres,Apellido1:Apellidos,Apellido2:Apellido2,IdSexo:IdSexo,Correo:Correo,
 			Cedula:Cedula,FechaNacimineto:FechaNacimineto,IdNacionalidad:IdNacionalidad,
 			Celular:Celular,Telefono:Telefono,IdUser:IdUser},
-		
+
 		success: function(res){
 			swal({
 				  title: 'GUARDADO!',
 				  type: 'success',
 				  html:
 				    'Cliente Guardado <b>Correctamente </b>. ',
-				  showCloseButton: true,			  
+				  showCloseButton: true,
 				  focusConfirm: false,
 				  confirmButtonText:
 				    '<i class="fa fa-thumbs-up"></i> OK!',
-				  confirmButtonAriaLabel: 'OK!',				 
+				  confirmButtonAriaLabel: 'OK!',
 				});
 
-				var routePersona = "/obtener/personas";	
+				var routePersona = "/obtener/personas";
 				$.get(routePersona, function(data){
 					var IdPersona = data.Idpersona;
 					var routePaciente ="/paciente/crear";
@@ -79,7 +81,7 @@ $("#AgregarCliente").click(function(e){
 						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 						type:'POST',
 						dataType:'JSON',
-						data:{IdPersona:IdPersona,SeguroMedico:SeguroMedico},
+						data:{IdPersona:IdPersona,SeguroMedico:SeguroMedico, NumeroSeguro:NumeroSeguro},
 						success: function(res){
 							Limpiar();
 						},
@@ -87,13 +89,13 @@ $("#AgregarCliente").click(function(e){
 
 						}
 					});
-				});	
-			
+				});
+
 		},
 		error:function(res){
 			alertify.error('Error');
-		}	 
-	});	
+		}
+	});
 	}else{
 		var errores ="";
 		if($("#Nombres").val()==""){
@@ -173,7 +175,7 @@ $("#AgregarCliente").click(function(e){
 			}
 		}else{
 			$("#DivCl").removeClass('has-error');
-		} 
+		}
 		if(SeguroMedico == ""){
 			$("#DivSG").addClass('has-error');
 			if(errores!=""){errores+="* Seguro Medico .<hr>";
@@ -188,8 +190,8 @@ $("#AgregarCliente").click(function(e){
 			alertify.error(errores);
 		}
 	}
-		
-	
+
+
 });
 
 

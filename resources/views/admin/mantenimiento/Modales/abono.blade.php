@@ -7,7 +7,6 @@
             <h4 class="modal-title">Abonar monto</h4>
           </div>
           <div class="modal-body">
-          	<form>
             <div class="row">
 	            <div class="col-md-12">
 	               <div class="form-group">
@@ -17,18 +16,24 @@
 	                    <i class="fa fa-dollar"></i>
 	                  </div>
 	                  <div id="DivPsUp" >
-	                   <input type="number" placeholder="Monto a Abonar" class="form-control verificacionPass" id="contraseña" name="monto">
+	                   <input type="number" placeholder="Monto a Abonar" class="form-control" id="abonoMonto" name="abonoMonto">
 	                  </div>
 	                </div>
 	              </div>
 	            </div>
             </div>
+            <div>
+              <div style="margin-left: auto !important;
+font-size: 22px;">Total: $<b id="montoTotalAbono"></b></div>
+              <br>
+              <div style="margin-left: auto !important;
+font-size: 22px;">Restante: $<b id="montoRestanteAbono"></b></div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-            <button type="button" id="ActualizarContraseña" class="btn btn-primary">Generar</button>
+            <button type="button" id="AbonarBtn" class="btn btn-primary">Generar</button>
           </div>
-         </form>
         </div>
     </div>
 </div>

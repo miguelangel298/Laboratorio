@@ -130,3 +130,7 @@ Route::get('/divisas/valor/{id}', 'AdminController@obtenerActualDivisa')->name('
 Route::post('/divisas/actualizar', 'AdminController@updateDivisa')->name('UpdateValorDivisa');
 
 Route::get('/chart/ingresos', 'AdminController@ObtenerIngresosUltimoAnio')->name('ObtenerIngresosUltimoAnio');
+
+Route::get('/pacientes/total', 'AdminController@ObtenerTotalPacientes')->name('ObtenerTotalFacturaPorSucursal');
+
+Route::get('/facturas/total', 'AdminController@ObtenerTotalFacturaPorSucursal')->name('ObtenerTotalPacientes');

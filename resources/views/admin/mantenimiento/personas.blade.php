@@ -166,6 +166,18 @@ Laboratorio | Agregar Paciente
                 <!-- /.input group -->
               </div>
               <!-- /.form-group -->
+              <div class="form-group">
+                <label>No. de Afiliado:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-id-card-o"></i>
+                  </div>
+                  <div id="DivNS">
+                    <input type="text" id="NumeroSeguro" class="form-control" style="width: 100%;">
+                  </div>
+                </div>
+                <!-- /.input group -->
+              </div>
             </div>
             <!-- /.col -->
           </div>

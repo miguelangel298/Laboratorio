@@ -44,11 +44,16 @@ $(document).ready(function($) {
 		 		{data: 'Estado'},
 		 		{data: 'IdFactura',
 		 			render: function(data, type, row){
+						html = "";
 		 				if(row.Estado == "Activa"){
-		 				return "<button onclick='desabilitar(this)' value="+data+" class='btn btn-default'  style='background: transparent; border: transparent; color:#01C613; font-size:16px; border-color: #fff;' ><i class='fa  fa-toggle-on' aria-hidden='true'></i> </button>"
+			 				html += "<button onclick='desabilitar(this)' value="+data+" class='btn btn-default'  style='background: transparent; border: transparent; color:#01C613; font-size:16px; border-color: #fff;' ><i class='fa  fa-toggle-on' aria-hidden='true'></i> </button>";
 		 				}else if (row.Estado == "Cancelada"){
-		 				return "<button onclick='habilitar(this)' value="+data+" class='btn btn-default'  style='background: transparent; border: transparent;  font-size:16px; ' ><i class='fa  fa-toggle-off' aria-hidden='true'></i> </button>"
-		 				}
+			 				html += "<button onclick='habilitar(this)' value="+data+" class='btn btn-default'  style='background: transparent; border: transparent;  font-size:16px; ' ><i class='fa  fa-toggle-off' aria-hidden='true'></i> </button>";
+		 				} else if (row.Estado == "Pendiente") {
+							html += "";
+						}
+						html += "<button class='btn btn-default btn-sm' style='margin: auto 10px;' data-toggle='modal' data-target='#abonar-modal'><i class='fa fa-usd'></i></button>";
+						return html;
 		 			}
 
 		 		},

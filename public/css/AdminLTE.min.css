@@ -83,3 +83,12 @@ show {
   background-color: #337ab7;
   border-color: #337ab7;
 }
+
+
+.treeview-menu, li.treeview {
+  background: #fff !important;
+}
+
+.sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right) {
+  background: #fff !important;
+}
