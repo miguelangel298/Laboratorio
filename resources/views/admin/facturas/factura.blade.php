@@ -197,7 +197,7 @@ Laboratorio | Factura
         </div>
       </div>
     </div>
-
+      <input type="hidden" name="procCount" id="procCount" value="0">
      <div class="row no-print">
         <div class="col-xs-12">
           <!-- <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
