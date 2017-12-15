@@ -7,7 +7,6 @@
             <h4 class="modal-title">Actualizar Divisa</h4>
           </div>
           <div class="modal-body">
-          	<form>
             <div class="row">
 	            <div class="col-md-12">
 	               <div class="form-group">
@@ -28,7 +27,6 @@
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
             <button type="button" id="updateDivisa" class="btn btn-primary">Actualizar</button>
           </div>
-         </form>
         </div>
     </div>
 </div>
