@@ -29,11 +29,11 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini">Dr<b>G</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Lab </b>Dr. García</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -75,17 +75,17 @@
         </li>
         <li class="{{ Request::is('factura') ? 'active' : ''}}">
           <a href="{!! url('/factura')!!}">
-            <i class="fa fa-address-card-o"></i> <span>Facturas</span>
+            <i class="fa fa-address-card-o"></i> <span>Nueva Factura</span>
           </a>
         </li>
         <li class="{{ Request::is('pacientes-list') ? 'active' : ''}}">
           <a href="{!! url('/pacientes-list')!!}">
-            <i class="fa fa-users"></i> <span>Paciente</span>
+            <i class="fa fa-users"></i> <span>Pacientes</span>
           </a>
         </li>
         <li class="{{ Request::is('factura-listadt') ? 'active' : ''}}">
           <a href="{!! url('/factura-listado')!!}">
-            <i class="fa fa-address-card-o"></i> <span>Listado Factura</span>
+            <i class="fa fa-address-card-o"></i> <span>Listado Facturas</span>
           </a>
         </li>
         <li class=" {{ Request::is('mantenimiento*') ? 'active' : ''}} treeview">
@@ -96,15 +96,15 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ Request::is('mantenimiento/clientes') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/clientes')!!}"><i class="fa fa-circle-o"></i> Paciente</a></li>
+            <li class="{{ Request::is('mantenimiento/clientes') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/clientes')!!}"><i class="fa fa-circle-o"></i> Nuevo Paciente</a></li>
             <li class="{{ Request::is('mantenimiento/procedimiento') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/procedimiento')!!}"><i class="fa fa-circle-o"></i> Procedimientos</a></li>
-            <li class="{{ Request::is('mantenimiento/empleado') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empleado')!!}"><i class="fa fa-circle-o"></i> Empleado</a></li>
-            <li class="{{ Request::is('mantenimiento/empresa') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empresa')!!}"><i class="fa fa-circle-o"></i>Mis Empresa</a></li>
+            <li class="{{ Request::is('mantenimiento/empleado') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empleado')!!}"><i class="fa fa-circle-o"></i> Empleados</a></li>
+            <li class="{{ Request::is('mantenimiento/empresa') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empresa')!!}"><i class="fa fa-circle-o"></i>Mis Empresas</a></li>
           </ul>
         </li>
         <li class=" {{ Request::is('reporte*') ? 'active' : ''}} treeview">
           <a href="#">
-            <i class="fa fa-bar-chart"></i> <span>Reporte</span>
+            <i class="fa fa-bar-chart"></i> <span>Reportes</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
