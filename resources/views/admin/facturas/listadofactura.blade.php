@@ -5,6 +5,9 @@ Laboratorio | Listado Factura
 @section('script')
 <script type="text/javascript" src="/js/cliente/listadofactura.js"></script>
 @endsection
+@section('modals')
+  @include('admin.mantenimiento.Modales.abono')
+@endsection
 @section('content')
 <section class="content-header">
       <h1>

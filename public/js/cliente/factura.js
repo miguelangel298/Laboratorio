@@ -83,7 +83,7 @@ $('#IdPacienteDatos').click(function () {
 
 });
 
-
+var DollarValor = "";
 var date = "";
 var f=new Date();
 var m2 = f.getMonth() + 1;
@@ -107,7 +107,6 @@ $("#IdProcedimiento").select2();
 		var codigoId = getCodigos();
 		LimpiarFactura();
 		$(codigoId).each(function(key,value){
-			console.log(value);
 			var routeProcedimiento = "/procemiento-pesos/"+moneda+"/"+value+"";
 			$.get(routeProcedimiento,function(res){
 				addProcedimiento(res);
@@ -128,9 +127,7 @@ ObtenerCliente = function (IdPacienteDatos) {
 			$("#contenedorDatos").html("<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><address><strong>"+data.Nombre+"</strong><br>Cedula: "+data.Cedula+"<br>Correo: "+data.Correo+"</address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'> <address><strong>"+data.IdNacionalidad+"</strong><br>Fecha de Nacimiento<br>"+data.FechaNacimineto+"<br></address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><b>Numero de Seguro:</b><br>#"+data.SeguroMedico+"<br><b>Telefono:</b> "+data.Celular+"<br></div></div><hr> ");
 			$("#IdCliente").val(data.IdPersona);
 			IdPersona = data.IdPersona;
-			console.log(data.IdPersona);
 		}
-		console.log(IdPacienteDatos);
 	});
 }
 
@@ -193,11 +190,42 @@ ObtenerCliente = function (IdPacienteDatos) {
 	var Descuento = 0;
 	var TotalPagar = 0;
 
+$('.divisa-p').click(function () {
+	IdDiv = $(this).data('value');
+	$(this).parent().addClass('active');
+	if (IdDiv == '1') {
+		$('#dollarDivisa').parent().removeClass('active');
+	} else {
+		$('#pesoDivisa').parent().removeClass('active');
+	}
+	if (moneda == IdDiv) {
+		return;
+	}
+	moneda = IdDiv;
+	IdDivisa = 1;
+	route = '/divisas/valor/' + IdDivisa;
+	$.get(route, function(res){
+		DollarValor = res.Valor;
+		arr = procedimientos;
+		arr.forEach(function (proc) {
+			if (IdDiv == '1') {
+				proc.precio *= parseInt(DollarValor);
+			} else {
+				proc.precio /= parseInt(DollarValor);
+			}
+		});
+		setTimeout(function () {
+			deleteAllProc();
+			procedimientos = arr;
+			getSuma();
+			showProcedimientos();
+		}, 200);
+	});
+});
 
 	var descuentoP = 0;
 	$("#Descuento").change(function(e){
 		e.preventDefault();
-		console.log($(this).val());
         descuentoP = $(this).val();
         if(procedimientos != ""){
 			getSuma();
@@ -219,7 +247,7 @@ function getSuma() {
 		sum += proc.precio;
 	});
 
-	$("#dinero").html(sum);
+	$("#dinero").html(roundNumber(sum, 2));
 	var totaldescuento = sum * descuentoP;
 
    var subtotaldescuento = sum-totaldescuento;
@@ -234,7 +262,13 @@ function getSuma() {
 
    $("#total").html( roundNumber(total, 2));
      TotalPagar = total;
+		 $('#montoTotalAbono').html(roundNumber(total, 2));
 }
+
+$('#abonoMonto').change(function () {
+	var abono = parseInt($(this).val());
+	$('#montoRestanteAbono').html(roundNumber(TotalPagar - abono, 2));
+});
 
 LimpiarFactura = function(){
 $("#dinero,#itbis,#descuentoHtml,#total").html("");
@@ -261,6 +295,11 @@ function clearDataTable() {
 }
 
 function showProcedimientos() {
+	$("#procCount").val(procedimientos.length);
+	var dis = (parseInt($("#procCount").val()) <= 0);
+	$('#GenerarFacturaTarjeta').prop('disabled', dis);
+	$('#GenerarFactura').prop('disabled', dis);
+	$('#AbonarFactura').prop('disabled', dis);
 	procedimientos.forEach(function (proc) {
 		showSingleProcedimiento(proc);
 	});
@@ -268,16 +307,19 @@ function showProcedimientos() {
 
 
 function showSingleProcedimiento(proc) {
-	 $("#ProcedimientoList").append("<tr class='tableid'><td>"+proc.codigo+"</td><td>"+proc.nombre+"</td><td>$"+proc.precio+"</td><td><button  title='Eliminar' onclick='deleteProcedimiento(this);' value="+proc.codigo+"  style='background-color:#fff;'  class='btn btn-danger text-center'><i style='color:red;' class='fa  fa-trash-o' aria-hidden='true'></i></button></td></tr>");
+	 $("#ProcedimientoList").append("<tr class='tableid'><td>"+proc.codigo+"</td><td>"+proc.nombre+"</td><td>$"+roundNumber(proc.precio, 2)+"</td><td><button  title='Eliminar' onclick='deleteProcedimiento(this);' value="+proc.codigo+"  style='background-color:#fff;'  class='btn btn-danger text-center'><i style='color:red;' class='fa  fa-trash-o' aria-hidden='true'></i></button></td></tr>");
 	 getSuma();
 }
 
  deleteProcedimiento = function (codigo) {
-
+	$("#procCount").val(parseInt($("#procCount").val()) - 1);
+	var dis = (parseInt($("#procCount").val()) <= 0);
+	$('#GenerarFacturaTarjeta').prop('disabled', dis);
+	$('#GenerarFactura').prop('disabled', dis);
+	$('#AbonarFactura').prop('disabled', dis);
 	procedimientos.forEach(function (proc, i) {
 		if (codigo.value == proc.codigo) {
 			var idDelete = i;
-			console.log(idDelete);
 			procedimientos.splice(idDelete, 1);
 			clearDataTable();
 			 showProcedimientos();
@@ -305,6 +347,11 @@ function showProc(codigo) {
 
 
 function deleteAllProc() {
+	$("#procCount").val("0");
+	var dis = (parseInt($("#procCount").val()) <= 0);
+	$('#GenerarFacturaTarjeta').prop('disabled', dis);
+	$('#GenerarFactura').prop('disabled', dis);
+	$('#AbonarFactura').prop('disabled', dis);
 	procedimientos = [];
 	clearDataTable();
 	showProcedimientos();
@@ -320,6 +367,11 @@ function pushProcedimiento(proc) {
 	if (!found) {
 		procedimientos.push(proc);
 		showProc(proc.codigo);
+		$("#procCount").val(parseInt($("#procCount").val()) + 1);
+		var dis = (parseInt($("#procCount").val()) <= 0);
+		$('#GenerarFacturaTarjeta').prop('disabled', dis);
+		$('#GenerarFactura').prop('disabled', dis);
+		$('#AbonarFactura').prop('disabled', dis);
 	} else {
 		swal(
 		  '...',
@@ -335,15 +387,20 @@ function addProcedimiento(res) {
 	 	nombre: res.Procedimiento,
 	 	precio: res.Peso
 	 };
+	 if (moneda == '2') {
+		 proc.precio /= parseInt(DollarValor);
+	 }
 	 pushProcedimiento(proc);
 	 order += 1;
 }
 
 $("#AgregarProcedimiento").click(function(e){
-	var routeProcedimiento = "/procemiento-pesos/"+moneda+"/"+IdProcedimiento+"";
-	$.get(routeProcedimiento,function(res){
-		addProcedimiento(res);
-	});
+	if (IdProcedimiento) {
+		var routeProcedimiento = "/procemiento-pesos/1/"+IdProcedimiento+"";
+		$.get(routeProcedimiento,function(res){
+			addProcedimiento(res);
+		});
+	}
 
 });
 
@@ -358,6 +415,12 @@ $("#AgregarProcedimiento").click(function(e){
 		SeguroMedico = "";
 	}
 
+
+var dis = (parseInt($("#procCount").val()) <= 0);
+$('#GenerarFacturaTarjeta').prop('disabled', dis);
+$('#GenerarFactura').prop('disabled', dis);
+$('#AbonarFactura').prop('disabled', dis);
+
 $("#AgregarCliente").click(function(e){
 	e.preventDefault();
 	var Nombres = $("#Nombres").val();
@@ -366,6 +429,7 @@ $("#AgregarCliente").click(function(e){
 	var IdUser = $("#IdUser").val();
 	var Correo = $("#Correo").val();
 	var Cedula = $("#Cedula").val();
+	var NumeroSeguro = $("#NumeroSeguro").val();
 	var FechaNacimineto = $("#FechaNacimineto").val();
 	var Celular = $("#Celular").val();
 	var Telefono = $("#Telefono").val();
@@ -401,7 +465,7 @@ $("#AgregarCliente").click(function(e){
 						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 						type:'POST',
 						dataType:'JSON',
-						data:{IdPersona:IdPersona1,SeguroMedico:SeguroMedico},
+						data:{IdPersona:IdPersona1,SeguroMedico:SeguroMedico, NumeroSeguro:NumeroSeguro},
 						success: function(res){
 							App.fetchPacientes();
 							$("#Cedulaid").val(Cedula);
@@ -539,6 +603,7 @@ GenerarFactura =  function(IdTipo) {
 	var TotalPagarC = TotalPagar;
 	var ModificadoPorF = $("#ModificadoPor").val();
 	var route = "/factura-generar";
+	var monto = $("#abonoMonto").val();
 
 	if($("#ModificadoPor").val() != ""){
 	$.ajax({
@@ -547,9 +612,11 @@ GenerarFactura =  function(IdTipo) {
 			type:'POST',
 			dataType:'JSON',
 			data:{IdPersona:IdPersona1,IdMoneda:IdMoneda,IdTipoPago:IdTipoPago,Total:Total,Itbis:ItbisC,
-				Descuento:DescuentoC,TotalPagar:TotalPagarC,ModificadoPor:ModificadoPorF},
+				Descuento:DescuentoC,TotalPagar:TotalPagarC,ModificadoPor:ModificadoPorF, Monto: monto},
 
 			success: function(res){
+				$("#abonoMonto").val("");
+				$('#abonar-modal').modal('hide');
 				swal({
 					  title: 'GUARDADO!',
 					  type: 'success',
@@ -627,6 +694,11 @@ $("#GenerarFactura").click(function(){
 var IdTipo = 1
 GenerarFactura(IdTipo);
 
+});
+
+$('#AbonarBtn').click(function () {
+	var IdTipo = 1;
+	GenerarFactura(IdTipo);
 });
 
 

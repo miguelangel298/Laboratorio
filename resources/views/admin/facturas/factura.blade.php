@@ -158,12 +158,12 @@ Laboratorio | Factura
         <div class="paymentWrap">
       <div class="btn-group paymentBtnGroup btn-group-justified" data-toggle="buttons">
           <label class="btn paymentMethod active">
-            <div class="method visa"></div>
-              <input type="radio" class="moneda" value="1" name="metododinero" checked>
+            <div class="method visa divisa-p" id="pesoDivisa" data-value="1"></div>
+              <!-- <input type="radio"  class="moneda" value="1" name="metododinero" checked> -->
           </label>
-          <label class="btn paymentMethod">
-            <div class="method master-card"></div>
-              <input type="radio" class="moneda" value="2" name="metododinero">
+          <label class="btn paymentMethod" >
+            <div class="method master-card divisa-p" id="dollarDivisa" data-value="2"></div>
+              <!-- <input type="radio"  class="moneda" value="2" name="metododinero"> -->
           </label>
       </div>
     </div>
@@ -197,13 +197,13 @@ Laboratorio | Factura
         </div>
       </div>
     </div>
-
-     <div class="row no-print">
-        <div class="col-xs-12">
-          <!-- <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
-          <button type="button"  id="GenerarFacturaTarjeta" class="GenerarFactura btn btn-success pull-right"><i class="fa fa-credit-card"></i> Pago por Tarjeta
+      <input type="hidden" name="procCount" id="procCount" value="0">
+     <div class="row col-md-12 no-print">
+        <div class="pull-right">
+          <button type="button"  id="AbonarFactura" class=" btn btn-info" data-toggle="modal" data-target="#abonar-modal"><i class="fa fa-usd"></i> Abonar</button>
+          <button type="button"  id="GenerarFacturaTarjeta" class="GenerarFactura btn btn-success"><i class="fa fa-credit-card"></i> Pago por Tarjeta
           </button>
-          <button type="button"  id="GenerarFactura"  class="GenerarFactura btn btn-primary pull-right" style="margin-right: 5px;">
+          <button type="button"  id="GenerarFactura"  class="GenerarFactura btn btn-primary" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Generar
           </button>
         </div>

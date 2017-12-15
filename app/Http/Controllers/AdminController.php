@@ -58,26 +58,21 @@ class AdminController extends Controller
         $TotalPagar = $request->input('TotalPagar');
         $ModificadoPor = Auth::user()->IdPersona;
         $IdSucursal = Auth::user()->IdSucursal;
-        $monto = $request->input('Monto');
+        $Monto = $request->input('Monto');
         $guardar  = DB::SELECT(DB::raw("CALL INSERT_Factura('$IdPersona','$IdMoneda','$IdTipoPago' ,'$Total','$Itbis','$Descuento','$TotalPagar','$ModificadoPor','$IdSucursal')"));
 
-        if($monto != ""){
+        if($Monto != ""){
           $IdFactura = DB::SELECT("SELECT max(factura.IdFactura) as IdFactura from factura");
           $IdFacturaId = $IdFactura[0]->IdFactura;
-          $this->abonoFactura($IdFacturaId,$monto);
+          $this->abonoFactura($IdFacturaId,$Monto);
         }
 
-        return response()->json([
-                "mensaje"=>"Creado"
-                ]);
-        }
+        return response()->json(["mensaje"=>"Creado"]);
+    }
 
-        public function abonoFactura($IdFactura,$monto){
-          $abono = DB::statement("call INSERT_AbonoFactura('$IdFactura','$monto')");
-          // return response()->json([
-          //         "mensaje"=>"Creado"
-          //         ]);
-        }
+    public function abonoFactura($IdFactura,$Monto){
+      $abono = DB::statement("call INSERT_AbonoFactura('$IdFactura','$Monto')");
+    }
 
 
     public function DatosFacturaCliente($cedula){
@@ -133,5 +128,23 @@ class AdminController extends Controller
     public function ObtenerIngresosUltimoAnio() {
       $datos = DB::select('CALL SELECT_IngresosUltimoAnio()');
       return response()->json($datos);
+    }
+
+    public function ObtenerTotalFacturaPorSucursal() {
+      $IdPersona = Auth::user()->IdPersona;
+      $datos = DB::select("CALL SELECT_TotalFacturasPorSucursal('$IdPersona')");
+      if (count($datos)) {
+        return response()->json($datos[0]);
+      }
+      return response()->json(['Total' => 0]);
+    }
+
+    public function ObtenerTotalPacientes() {
+      $IdPersona = Auth::user()->IdPersona;
+      $datos = DB::select('CALL SELECT_TotalPacientes()');
+      if (count($datos)) {
+        return response()->json($datos[0]);
+      }
+      return response()->json(['Total' => 0]);
     }
 }

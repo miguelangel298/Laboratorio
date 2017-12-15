@@ -114,6 +114,7 @@ EditarEmpleado = function(data){
 		$("#Celular").val(res.Celular);
 		$("#Telefono").val(res.Telefono);
 		$("#SeguroMedico").val(res.SeguroMedico);
+		$("#NumeroSeguro").val(res.NumeroSeguro);
 		IdSexo = res.IdNacionalidad;
 		IdNacionalidad = res.IdNacionalidad;
 		SeguroMedico = res.SeguroMedico;
@@ -129,6 +130,7 @@ $("#ActualizarCliente").click(function(e){
 	var Correo = $("#Correo").val();
 	var Cedula = $("#Cedula").val();
 	var FechaNacimineto = $("#FechaNacimineto").val();
+	var NumeroSeguro = $('#NumeroSeguro').val();
 	var Celular = $("#Celular").val();
 	var Telefono = $("#Telefono").val();
 	var route = "/paciente/update";
@@ -140,7 +142,7 @@ $("#ActualizarCliente").click(function(e){
 		dataType:'JSON',
 		data:{Nombres:Nombres,Apellido1:Apellido1,Apellido2:Apellido2,IdSexo:IdSexo,Correo:Correo,
 			Cedula:Cedula,FechaNacimineto:FechaNacimineto,IdNacionalidad:IdNacionalidad,
-			Celular:Celular,Telefono:Telefono,IdPersona:IdPersona,SeguroMedico:SeguroMedico},
+			Celular:Celular,Telefono:Telefono,IdPersona:IdPersona,SeguroMedico:SeguroMedico, NumeroSeguro:NumeroSeguro},
 
 		success: function(res){
 			listadoPaciente();
