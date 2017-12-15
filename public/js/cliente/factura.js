@@ -273,7 +273,10 @@ function showSingleProcedimiento(proc) {
 }
 
  deleteProcedimiento = function (codigo) {
-
+	$("#procCount").val(parseInt($("#procCount").val()) - 1);
+	var dis = (parseInt($("#procCount").val()) <= 0);
+	$('#GenerarFacturaTarjeta').prop('disabled', dis);
+	$('#GenerarFactura').prop('disabled', dis);
 	procedimientos.forEach(function (proc, i) {
 		if (codigo.value == proc.codigo) {
 			var idDelete = i;
@@ -305,6 +308,10 @@ function showProc(codigo) {
 
 
 function deleteAllProc() {
+	$("#procCount").val("0");
+	var dis = (parseInt($("#procCount").val()) <= 0);
+	$('#GenerarFacturaTarjeta').prop('disabled', dis);
+	$('#GenerarFactura').prop('disabled', dis);
 	procedimientos = [];
 	clearDataTable();
 	showProcedimientos();
@@ -320,6 +327,10 @@ function pushProcedimiento(proc) {
 	if (!found) {
 		procedimientos.push(proc);
 		showProc(proc.codigo);
+		$("#procCount").val(parseInt($("#procCount").val()) + 1);
+		var dis = (parseInt($("#procCount").val()) <= 0);
+		$('#GenerarFacturaTarjeta').prop('disabled', dis);
+		$('#GenerarFactura').prop('disabled', dis);
 	} else {
 		swal(
 		  '...',
@@ -357,6 +368,11 @@ $("#AgregarProcedimiento").click(function(e){
 		IdNacionalidad = "";
 		SeguroMedico = "";
 	}
+
+
+var dis = (parseInt($("#procCount").val()) <= 0);
+$('#GenerarFacturaTarjeta').prop('disabled', dis);
+$('#GenerarFactura').prop('disabled', dis);
 
 $("#AgregarCliente").click(function(e){
 	e.preventDefault();
