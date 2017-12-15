@@ -11,6 +11,7 @@ Laboratorio | Factura
 
 @section('modals')
   @include('admin.mantenimiento.Modales.AgregarCliente')
+  @include('admin.mantenimiento.Modales.abono')
 @endsection
 
 @section('content')
@@ -34,7 +35,7 @@ Laboratorio | Factura
           <small class="pull-right">Fecha: <span id="FechaUp"></span></small>
         </h2>
       </div>
-       <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+       <div class="col-md-10">
         <form role="form"  @submit.prevent="getCurrentPaciente()">
           <div class="form-group">
                 <div class="input-group">
@@ -42,7 +43,17 @@ Laboratorio | Factura
                     <i class="fa fa-address-card"></i>
                 </div>
                 <div id="DivC">
-                  <input type="text" id="IdPacienteDatos"  class="form-control" style="width: 100%;" autocomplete="off" v-model="searchQuery" :disabled="pacientes.length === 0" placeholder="Introduzca un Nombre o Cedula">
+                  <input type="text" id="IdPacienteDatos" maxlength="80"  class="form-control" style="width: 100%;" autocomplete="off" v-model="searchQuery" :disabled="pacientes.length === 0" placeholder="Introduzca un Nombre o Cedula">
+                  <div class="row hide" id="livesearch" role="menu">
+                    <ul class="list-group">
+                       <li  v-for="(paciente, i) in busqueda" @click="setCurrent(paciente)" class='list-group-item' v-if="i < 10" style='position: relative; font-size:10; cursor: pointer; z-index: 1000;' v-cloak>
+                         @{{ paciente.Nombres }} @{{ paciente.Apellidos }} (@{{ paciente.Cedula }})
+                       </li>
+                       <li class='list-group-item' style='position: relative; font-size:10; cursor: pointer; z-index: 1000;' v-if="busqueda.length == 0" v-cloak>
+                         No se encontraron resultados para '@{{searchQuery}}'.
+                       </li>
+                    </ul>
+                  </div>
                   <!-- <select id="IdPacienteDatos" class="form-control select2" >
                       <option selected="selected" disabled="">Buscar cliente..</option>
                       @foreach($clientes as $cliente)
@@ -53,16 +64,10 @@ Laboratorio | Factura
                 </div>
                 </div>
             </div>
-            <div class="row hide" id="livesearch" role="menu">
-              <ul class="list-group">
-                 <li  v-for="(paciente, i) in busqueda" @click="setCurrent(paciente)" class='list-group-item' v-if="i < 5" style='position: relative; font-size:10; cursor: pointer; z-index: 1000;' v-cloak>
-                   @{{ paciente.Nombres }} @{{ paciente.Apellidos }} (@{{ paciente.Cedula }})
-                 </li>
-              </ul>
-            </div>
       </div>
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <button type="submit" value="" @click.prevent="getCurrentPaciente()" id="ObtenerCliente" class="btn btn-primary">Buscar</button>
+      <div class="col-md-2">
+        <!-- <button type="submit" value="" :disabled="busqueda.length == 0" @click.prevent="getCurrentPaciente()" id="ObtenerCliente" class="btn btn-primary">Buscar</button> -->
+        <button type="button" value="" v-show="busqueda.length == 0" v-cloak class="btn btn-success" data-target="#agregarClienteModal" data-toggle="modal"><i class="fa fa-plus" style="margin-right: 10px;"></i>Agregar Paciente</button>
       </div>
       </form>
       <!-- /.col -->
@@ -100,7 +105,7 @@ Laboratorio | Factura
         </div>
       </div>
       </div>
-      <input type="hidden" id="IdCliente" >
+      <input type="hidden" id="IdCliente" value="">
        <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6">
      <div class="form-group">
 

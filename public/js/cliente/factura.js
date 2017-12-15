@@ -1,5 +1,81 @@
+Vue.prototype.$http = axios;
+
+App = new Vue({
+	el: '#app-paciente',
+	data: {
+		searchQuery: '',
+		pacientes: [],
+		busqueda: [],
+		currentPaciente: {},
+	},
+	mounted: function () {
+		this.fetchPacientes();
+	},
+	watch: {
+		searchQuery: function (newVal) {
+			if (newVal && this.pacientes) {
+				this.busqueda = this.pacientes.filter(function (paciente) {
+					paciente.Nombres = paciente.Nombres || '';
+					paciente.Apellidos = paciente.Apellidos || '';
+					paciente.Cedula = paciente.Cedula || '';
+					wildcard = paciente.Nombres + ' ' + paciente.Apellidos + ' (' + paciente.Cedula + ')';
+					cedula = paciente.Cedula.replace(/\-/g, '');
+					return wildcard.toLowerCase().includes(newVal.toLowerCase().trim()) || cedula.toLowerCase().includes(newVal.toLowerCase().trim());
+				});
+			} else {
+				this.busqueda = this.pacientes;
+			}
+		},
+	},
+	methods: {
+		fetchPacientes: function () {
+			var app = this;
+			this.$http.get('/listadopaciente')
+			.then(function (response) {
+				app.pacientes = response.data.data;
+				app.busqueda = app.pacientes;
+			}).catch(function (err) {
+				console.log(err);
+			});
+		},
+		setCurrent: function (paciente) {
+			$('#IdPacienteDatos').focusout();
+			this.currentPaciente = paciente;
+			ObtenerCliente(paciente.Idpersona);
+			this.currentPaciente = {};
+			this.searchQuery = '';
+			// set vue
+		},
+		getCurrentPaciente: function () {
+				$('#IdPacienteDatos').focusout();
+				paciente = this.busqueda[0];
+				if (paciente) {
+					ObtenerCliente(paciente.Idpersona);
+					this.searchQuery = '';
+				}
+		},
+	}
+});
+
+
+
+
+
+
 $("#contenidoFactura").hide();
 $(document).ready(function($) {
+
+$('#IdPacienteDatos').focusout(function () {
+	setTimeout(function () {
+		$('#livesearch').removeClass('show');
+		$('#livesearch').addClass('hide');
+	}, 100);
+});
+
+$('#IdPacienteDatos').focus(function () {
+	$('#livesearch').removeClass('hide');
+	$('#livesearch').addClass('show');
+});
 
 $('#IdPacienteDatos').click(function () {
 	$('#livesearch').removeClass('hide');
@@ -38,33 +114,11 @@ $("#IdProcedimiento").select2();
 				});
 		});
 		});
-
+var IdPersona = "";
 ObtenerCliente = function (IdPacienteDatos) {
 	var RutaDatos = "/factura/cliente/datos/"+IdPacienteDatos+"";
 	$.get(RutaDatos, function(data) {
 		if (data.Error == 'Funciona') {
-			swal({
-				  title: 'Paciente No Registrado',
-				  type: 'warning',
-				  html:
-				    'Registra paciente para Procesar la Factura! ',
-				  showCloseButton: true,
-				  showCancelButton: true,
-				  focusConfirm: false,
-				  confirmButtonText:
-				    '<i class="fa fa-user"></i> Registrar!',
-				  confirmButtonAriaLabel: 'Registrar!',
-				  cancelButtonText:
-				  'Verificar',
-				  cancelButtonAriaLabel: 'Verificar',
-				}).then(function () {
-			  $(".bs-example-modal-lg").modal('toggle');
-			}, function (dismiss) {
-
-			  if (dismiss === 'Verificar') {
-
-			  }
-			});
 		$("#contenedorDatos").html("<div class='alert alert-warning alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button><h4><i class='icon fa fa-warning'></i> Cliente no esta Registrado!</h4>Dirigirse a la seccion mantenimiento/cliente para Procesar con la Factura.</div><hr> ");
 
 		}else{
@@ -73,7 +127,10 @@ ObtenerCliente = function (IdPacienteDatos) {
 			$("#contenedorDatos").show();
 			$("#contenedorDatos").html("<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><address><strong>"+data.Nombre+"</strong><br>Cedula: "+data.Cedula+"<br>Correo: "+data.Correo+"</address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'> <address><strong>"+data.IdNacionalidad+"</strong><br>Fecha de Nacimiento<br>"+data.FechaNacimineto+"<br></address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><b>Numero de Seguro:</b><br>#"+data.SeguroMedico+"<br><b>Telefono:</b> "+data.Celular+"<br></div></div><hr> ");
 			$("#IdCliente").val(data.IdPersona);
+			IdPersona = data.IdPersona;
+			console.log(data.IdPersona);
 		}
+		console.log(IdPacienteDatos);
 	});
 }
 
@@ -122,6 +179,8 @@ ObtenerCliente = function (IdPacienteDatos) {
 	$("#IdPacienteDatos").change(function(e){
 		e.preventDefault();
         IdPacienteDatos = $(this).val();
+				$('#livesearch').removeClass('hide');
+				$('#livesearch').addClass('show');
 	});
 
 
@@ -333,24 +392,21 @@ $("#AgregarCliente").click(function(e){
 				    '<i class="fa fa-thumbs-up"></i> OK!',
 				  confirmButtonAriaLabel: 'OK!',
 				});
-
 				var routePersona = "/obtener/personas";
 				$.get(routePersona, function(data){
-					var IdPersona = data.Idpersona;
+					var IdPersona1 = data.Idpersona;
 					var routePaciente ="/paciente/crear";
 					$.ajax({
 						url:routePaciente,
 						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 						type:'POST',
 						dataType:'JSON',
-						data:{IdPersona:IdPersona,SeguroMedico:SeguroMedico},
+						data:{IdPersona:IdPersona1,SeguroMedico:SeguroMedico},
 						success: function(res){
+							App.fetchPacientes();
 							$("#Cedulaid").val(Cedula);
-							var RutaDatos = "/factura/cliente/datos/"+Cedula+"";
-							$.get(RutaDatos, function(data) {
-								$("#contenedorDatos").html("<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><address><strong>"+data.Nombre+"</strong><br>Cedula: "+data.Cedula+"<br>Correo: "+data.Correo+"</address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'> <address><strong>"+data.IdNacionalidad+"</strong><br>Fecha de Nacimiento<br>"+data.FechaNacimineto+"<br></address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><b>Numero de Seguro:</b><br>#"+data.SeguroMedico+"<br><b>Telefono:</b> "+data.Celular+"<br><hr></div></div><hr> ");
-							$(".bs-example-modal-lg").modal('toggle');
-							});
+							App.setCurrent({ Idpersona: IdPersona1 });
+							$("#agregarClienteModal").modal('toggle');
 							Limpiar();
 						},
 						error: function(res){
@@ -474,7 +530,7 @@ var array = [];
 
 //GENERAL FACTURA
 GenerarFactura =  function(IdTipo) {
-	var IdPersona = $("#IdCliente").val();
+	var IdPersona1 = $("#IdCliente").val();
 	var IdMoneda =  moneda;
 	var IdTipoPago = IdTipo;
 	var Total = suma;
@@ -490,7 +546,7 @@ GenerarFactura =  function(IdTipo) {
 			headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 			type:'POST',
 			dataType:'JSON',
-			data:{IdPersona:IdPersona,IdMoneda:IdMoneda,IdTipoPago:IdTipoPago,Total:Total,Itbis:ItbisC,
+			data:{IdPersona:IdPersona1,IdMoneda:IdMoneda,IdTipoPago:IdTipoPago,Total:Total,Itbis:ItbisC,
 				Descuento:DescuentoC,TotalPagar:TotalPagarC,ModificadoPor:ModificadoPorF},
 
 			success: function(res){
@@ -574,62 +630,4 @@ GenerarFactura(IdTipo);
 });
 
 
-});
-
-
-Vue.prototype.$http = axios;
-
-let app = new Vue({
-	el: '#app-paciente',
-	data: {
-		searchQuery: '',
-		pacientes: [],
-		busqueda: [],
-		currentPaciente: {},
-	},
-	mounted: function () {
-		this.fetchPacientes();
-	},
-	watch: {
-		searchQuery: function (newVal) {
-			if (newVal && this.pacientes) {
-				this.busqueda = this.pacientes.filter(function (paciente) {
-					paciente.Nombres = paciente.Nombres || '';
-					paciente.Apellidos = paciente.Apellidos || '';
-					paciente.Cedula = paciente.Cedula || '';
-					return paciente.Nombres.toLowerCase().includes(newVal.toLowerCase().trim()) ||
-					paciente.Apellidos.toLowerCase().includes(newVal.toLowerCase().trim()) ||
-					paciente.Cedula.toLowerCase().includes(newVal.toLowerCase().trim());
-				});
-			} else {
-				this.busqueda = this.pacientes;
-			}
-		},
-	},
-	methods: {
-		fetchPacientes: function () {
-			var app = this;
-			this.$http.get('/listadopaciente')
-			.then(function (response) {
-				app.pacientes = response.data.data;
-				app.busqueda = app.pacientes;
-			}).catch(function (err) {
-				console.log(err);
-			});
-		},
-		setCurrent: function (paciente) {
-			this.searchQuery = paciente.Nombres + ' ' + paciente.Apellidos + ' (' + paciente.Cedula + ')';
-			this.currentPaciente = paciente;
-			$('#livesearch').toggleClass('hide show');
-			ObtenerCliente(paciente.Idpersona);
-			this.currentPaciente = {};
-			// set vue
-		},
-		getCurrentPaciente: function () {
-			$('#livesearch').toggleClass('hide show');
-				paciente = this.busqueda[0];
-				ObtenerCliente(paciente.Idpersona);
-				this.searchQuery = paciente.Nombres + ' ' + paciente.Apellidos + ' (' + paciente.Cedula + ')';
-		}
-	}
 });

@@ -65,17 +65,21 @@ show {
     overflow-y: scroll;
     max-width: 100%;
     max-height: 210px;
-    position: relative;
+    position: absolute;
     margin: 0;
-    top: -15px;
+    top: 33px;
     z-index: 1000;
+    width: 100% !important;
+    right: 0;
+    left: 0;
 }
-
 #livesearch > .list-group {
   margin: 0;
   padding: 0;
 }
 
 #livesearch > ul > li:hover {
-  background: #f5f5f5;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #337ab7;
 }

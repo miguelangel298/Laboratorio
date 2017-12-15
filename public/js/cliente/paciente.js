@@ -1,5 +1,6 @@
 $(document).ready(function($) {
 
+
 	listadoPaciente = function(){
 	$("#TablaPaciente").DataTable({
 		destroy: true,
@@ -105,6 +106,10 @@ EditarEmpleado = function(data){
 		$("#Correo").val(res.Correo);
 		$("#Cedula").val(res.Cedula);
 		$("#FechaNacimineto").val(ano+"/"+mes+"/"+dia);
+		$('#FechaNacimineto').datepicker({
+			format: "yyyy/mm/dd",
+			autoclose: true,
+		});
 		$("#IdNacionalidad").val(res.IdNacionalidad);
 		$("#Celular").val(res.Celular);
 		$("#Telefono").val(res.Telefono);
