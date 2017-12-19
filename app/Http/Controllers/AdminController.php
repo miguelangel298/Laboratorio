@@ -74,6 +74,14 @@ class AdminController extends Controller
       $abono = DB::statement("call INSERT_AbonoFactura('$IdFactura','$Monto')");
     }
 
+    public function preAbonoFactura(Request $request){
+      $IdFactura = $request->input('IdFactura');
+      $abono = $request->input('abono');
+      $this->abonoFactura($IdFactura,$abono);
+      return response()->json([
+          "up"=>"Generado"
+          ]);
+    }
 
     public function DatosFacturaCliente($cedula){
         $datos = DB::SELECT("SELECT  CONCAT(personas.Nombres,' ',personas.Apellido1,' ',personas.Apellido2) AS Nombre, personas.Cedula,personas.Correo,nacionalidades.Nombre as IdNacionalidad,personas.FechaNacimineto,personas.Celular, pacientes.SeguroMedico,pacientes.IdPersona

@@ -3,8 +3,12 @@
 Laboratorio | Listado Factura
 @endsection
 @section('script')
+<script src="/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script type="text/javascript" src="/js/cliente/listadofactura.js"></script>
 @endsection
+
 @section('modals')
   @include('admin.mantenimiento.Modales.abono')
 @endsection

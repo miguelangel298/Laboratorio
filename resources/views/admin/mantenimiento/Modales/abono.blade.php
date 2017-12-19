@@ -16,18 +16,19 @@
 	                    <i class="fa fa-dollar"></i>
 	                  </div>
 	                  <div id="DivPsUp" >
-	                   <input type="number" placeholder="Monto a Abonar" class="form-control" id="abonoMonto" name="abonoMonto">
+	                   <input type="text" placeholder="Monto a Abonar" class="form-control" id="abonoMonto">
 	                  </div>
 	                </div>
 	              </div>
 	            </div>
             </div>
-            <div>
-              <div style="margin-left: auto !important;
-font-size: 22px;">Total: $<b id="montoTotalAbono"></b></div>
+            <br>
+            <div class="row">
+              <div class="col-md-6" style="font-size: 22px;">Pendiente: $<b id="montoPendienteAbono"></b></div>
+              <div class="col-md-offset-1 col-md-5" style="font-size: 22px;">Total: $<b id="montoTotalAbono"></b></div>
               <br>
-              <div style="margin-left: auto !important;
-font-size: 22px;">Restante: $<b id="montoRestanteAbono"></b></div>
+              <br>
+              <div class="col-md-6" style="font-size: 22px;">Restante: $<b id="montoRestanteAbono"></b></div>
             </div>
           </div>
           <div class="modal-footer">

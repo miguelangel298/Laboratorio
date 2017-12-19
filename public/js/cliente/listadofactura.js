@@ -45,15 +45,19 @@ $(document).ready(function($) {
 		 		{data: 'IdFactura',
 		 			render: function(data, type, row){
 						html = "";
+						html += "<input id='ValorFacturaRestante-" + data +"' type='hidden' value='" + row.Restante + "'><input id='ValorFacturaTotal-" + data +"' value='" + row.Total + "' type='hidden'><input type='hidden' value='" + row.Abono + "' id='ValorFacturaAbono-" + data +"'>";
 		 				if(row.Estado == "Activa"){
 			 				html += "<button onclick='desabilitar(this)' value="+data+" class='btn btn-default'  style='background: transparent; border: transparent; color:#01C613; font-size:16px; border-color: #fff;' ><i class='fa  fa-toggle-on' aria-hidden='true'></i> </button>";
 		 				}else if (row.Estado == "Cancelada"){
 			 				html += "<button onclick='habilitar(this)' value="+data+" class='btn btn-default'  style='background: transparent; border: transparent;  font-size:16px; ' ><i class='fa  fa-toggle-off' aria-hidden='true'></i> </button>";
-		 				} else if (row.Estado == "Pendiente") {
-							html += "";
+		 				}
+						if(row.Restante != 0){
+							html += "<button value="+data+" class='btn btn-default btn-sm' style='margin: auto 10px;' data-toggle='modal' onclick='mostrarPendiente(this)' data-target='#abonar-modal'><i class='fa fa-usd'></i></button>";
+							return html;
+						}else{
+							return html;
+
 						}
-						html += "<button class='btn btn-default btn-sm' style='margin: auto 10px;' data-toggle='modal' data-target='#abonar-modal'><i class='fa fa-usd'></i></button>";
-						return html;
 		 			}
 
 		 		},
@@ -62,6 +66,72 @@ $(document).ready(function($) {
 	});
 }
 listadoFactura();
+// $('[data-mask]').inputmask();
+function roundNumber(number, precision){
+    precision = Math.abs(parseInt(precision)) || 0;
+    var multiplier = Math.pow(10, precision);
+    return (Math.round(number * multiplier) / multiplier);
+}
+
+$('#abonoMonto').keypress(function (evt) {
+	var theEvent = evt || window.event;
+  var keyCode = theEvent.keyCode || theEvent.which;
+  key = String.fromCharCode(keyCode);
+  var regex = /[0-9]/;
+	if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40 || keyCode === 13 || keyCode === 110) {
+		return;
+	}
+  if( !regex.test(key) || $('#abonoMonto').val().length >= $('#montoTotalAbono').html().length) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+});
+	var IdFactura = "";
+mostrarPendiente = function(btn){
+	IdFactura = btn.value;
+	var total = $('#ValorFacturaTotal-' + IdFactura).val();
+	var restante = $('#ValorFacturaRestante-' + IdFactura).val();
+	var _abono = $('#ValorFacturaAbono-' + IdFactura).val();
+
+	$('#montoPendienteAbono').html(restante);
+	$('#montoTotalAbono').html(total);
+	$('#montoRestanteAbono').html(restante);
+
+	$('#abonoMonto').change(function () {
+		var abono = parseFloat($(this).val());
+		var res = roundNumber(restante - abono, 2);
+		if (res < 0) {
+			$('#montoRestanteAbono').html(res);
+			$('#montoRestanteAbono').parent().addClass('text-danger');
+			$('#AbonarBtn').prop('disabled', true);
+		} else {
+			$('#montoRestanteAbono').html(res);
+			$('#montoRestanteAbono').parent().removeClass('text-danger');
+			$('#AbonarBtn').prop('disabled', false);
+		}
+	});
+}
+
+$("#AbonarBtn").click(function(){
+var abono = $("#abonoMonto").val();
+var route = '/factura-abono';
+	$.ajax({
+		url:route,
+		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+		type:'POST',
+		dataType:'JSON',
+		data:{IdFactura:IdFactura,abono:abono},
+		success: function(){
+			listadoFactura();
+			$("#abonar-modal").modal('hide');
+			$("#abonoMonto").val("");
+			alertify.success("Guardado");
+		},
+		error: function(){
+			console.log("error");
+		}
+	});
+});
 
 var ModificadoPor = 11;
 

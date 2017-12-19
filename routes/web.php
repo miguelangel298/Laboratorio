@@ -97,6 +97,8 @@ Route::post('/factura/detalle/crear', 'AdminController@DetalleFacturacrear')->na
 
 Route::post('/factura-generar', 'AdminController@CrearFactura')->name('CrearFactura');
 
+Route::post('/factura-abono', 'AdminController@preAbonoFactura')->name('preAbonoFactura');
+
 Route::get('/factura-id', 'AdminController@IdFacturaMax')->name('IdFacturaMax');
 
 Route::get('/factura-print/{IdFactura}', 'AdminController@PrintFactura')->name('PrintFactura');
