@@ -14,24 +14,26 @@ class ReporteController extends Controller
    }
 
    public function ObtenerGanancias($IdMoneda,$IdSucursal,$desde,$hasta){
+     $guardar = null;
+      if($IdSucursal == 0){
+        $guardar  = DB::SELECT(DB::raw("CALL SELECT_GananciasByFechaMoneda('$IdMoneda','$desde','$hasta')"));
+      } else {
+        $guardar  = DB::SELECT(DB::raw("CALL SELECT_GanaciasByFechaMonedaSucursal('$IdMoneda','$IdSucursal','$desde','$hasta')"));
+      }
+      return Response()->json($guardar);
+   }
 
-    if($IdSucursal == 0){
-        $datos = DB::SELECT(" SELECT    factura.Fecha, users.name Caja,sucursales.Nombre Sucursal,factura.IdFactura, procedimientos.Nombre Procedimiento,monedas.Simbolo, costos.Costo
-    FROM    factura inner JOIN
-                detallefactura on detallefactura.IdFactura=factura.IdFactura INNER JOIN
-                procedimientos on procedimientos.IdProcedimiento=detallefactura.IdProcedimiento inner JOIN
-                monedas ON monedas.IdMoneda = factura.IdMoneda INNER JOIN
-                costos ON costos.IdMoneda = monedas.IdMoneda  and costos.IdProcedimiento=procedimientos.IdProcedimiento inner JOIN
-                users ON users.IdUser = factura.ModificadoPor INNER JOIN
-                sucursales on sucursales.IdSucursal = factura.IdSucursal
-    WHERE   factura.IdMoneda = '$IdMoneda' and factura.IdEstadoFactura=1 and ((substring(cast(factura.Fecha AS CHAR),1,10)) BETWEEN '$desde' and '$hasta')
-    order by  factura.Fecha, factura.IdFactura,factura.IdSucursal ASC;");
-        return Response()->json($datos);
-    }else{
-    $guardar  = DB::SELECT(DB::raw("CALL SELECT_GanaciasByFechaMonedaSucursal('$IdMoneda','$IdSucursal','$desde','$hasta')"));
-          return Response()->json($guardar);
-    }
-
+   public function ObtenerGananciasTotal($IdMoneda, $IdSucursal, $desde, $hasta){
+     $total = null;
+     if ($IdSucursal == 0) {
+       $total = DB::SELECT(DB::raw("CALL SELECT_GanaciasByFechaMonedaTotal('$IdMoneda','$desde','$hasta')"));
+     } else {
+       $total = DB::SELECT(DB::raw("CALL SELECT_GanaciasByFechaMonedaSucursalTotal('$IdMoneda','$IdSucursal','$desde','$hasta')"));
+     }
+     if (count($total)) {
+       return response()->json($total[0]);
+     }
+     return 0;
    }
 
 
@@ -55,7 +57,7 @@ class ReporteController extends Controller
         return $pdf->download('Ganancias.pdf');
     }
 
-      
+
    }
 
    public function Factura(){
