@@ -128,6 +128,8 @@
   @yield('content')
   </section>
   </div>
+
+  @yield('modals')
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
@@ -169,7 +171,7 @@
 @yield('script')
 
 
-@yield('modals')
+
 
 </body>
 </html>
