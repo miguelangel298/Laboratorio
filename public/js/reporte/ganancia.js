@@ -49,7 +49,11 @@ $("#AgregarCliente").click(function(e){
  	var route = "/reporte-ganancia/"+IdMoneda+"/"+IdSucursal+"/"+desde+"/"+hasta+"";
 		// location = route;
 			var TablaDatos = $("#DatosReporteGanancias").empty();
-
+      var route2 = "/reporte-ganancia-total/"+IdMoneda+"/"+IdSucursal+"/"+desde+"/"+hasta+"";
+      $.get(route2, function (res) {
+        var total = res.Total;
+        $('#totalGananciaFactura').html(total);
+      });
 			$.get(route, function(data){
 				if(data != ""){
 					$(data).each(function(key,value){

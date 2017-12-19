@@ -108,6 +108,7 @@ Route::get('/factura-print/{IdFactura}', 'AdminController@PrintFactura')->name('
 Route::get('/reporte/ganancia', 'ReporteController@ganancias')->name('ganancias');
 
 Route::get('/reporte-ganancia/{IdMoneda}/{IdSucursal}/{desde}/{hasta}', 'ReporteController@ObtenerGanancias')->name('ObtenerGanancias');
+Route::get('/reporte-ganancia-total/{IdMoneda}/{IdSucursal}/{desde}/{hasta}', 'ReporteController@ObtenerGananciasTotal')->name('ObtenerGananciasTotal');
 
 Route::get('/reporte/factura', 'ReporteController@Factura')->name('Factura');
 
