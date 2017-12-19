@@ -63,6 +63,8 @@ App = new Vue({
 
 
 $("#contenidoFactura").hide();
+$("#montoTotalAbono").parent().removeClass('col-md-offset-1');
+$("#montoPendienteAbono").parent().hide();
 $(document).ready(function($) {
 
 $('#IdPacienteDatos').focusout(function () {
@@ -265,9 +267,31 @@ function getSuma() {
 		 $('#montoTotalAbono').html(roundNumber(total, 2));
 }
 
+$('#abonoMonto').keypress(function (evt) {
+	var theEvent = evt || window.event;
+  var keyCode = theEvent.keyCode || theEvent.which;
+  key = String.fromCharCode(keyCode);
+  var regex = /[0-9]/;
+	if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40 || keyCode === 13 || keyCode === 110) {
+		return;
+	}
+  if( !regex.test(key) || $('#abonoMonto').val().length >= $('#montoTotalAbono').html().length) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+});
+
 $('#abonoMonto').change(function () {
-	var abono = parseInt($(this).val());
-	$('#montoRestanteAbono').html(roundNumber(TotalPagar - abono, 2));
+	var abono = parseFloat($(this).val());
+	var total = $("#montoTotalAbono").html();
+	var res = roundNumber(total - abono, 2);
+	if (res < 0) {
+		$('#montoRestanteAbono').html('0');
+		$('#AbonarBtn').prop('disabled', true);
+	} else {
+		$('#montoRestanteAbono').html(res);
+		$('#AbonarBtn').prop('disabled', false);
+	}
 });
 
 LimpiarFactura = function(){
