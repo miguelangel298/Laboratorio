@@ -50,10 +50,12 @@ class ReporteController extends Controller
     WHERE   factura.IdMoneda = '$IdMoneda' and factura.IdEstadoFactura=1 and ((substring(cast(factura.Fecha AS CHAR),1,10)) BETWEEN '$desde' and '$hasta')
     order by  factura.Fecha, factura.IdFactura,factura.IdSucursal ASC;");
         $pdf = PDF::loadView('admin.reporte.archivos-pdf.pdfganancia',['Ganancias' => $Ganancias]);
+        $pdf->setOptions(['isRemoteEnabled' => true, 'isJavascriptEnabled' => true, 'isHtml5ParserEnabled' => true]);
         return $pdf->download('Ganancias.pdf');
     }else{
    $Ganancias  = DB::SELECT(DB::raw("CALL SELECT_GanaciasByFechaMonedaSucursal('$IdMoneda','$IdSucursal','$desde','$hasta')"));
         $pdf = PDF::loadView('admin.reporte.archivos-pdf.pdfganancia',['Ganancias' => $Ganancias]);
+        $pdf->setOptions(['isRemoteEnabled' => true, 'isJavascriptEnabled' => true, 'isHtml5ParserEnabled' => true]);
         return $pdf->download('Ganancias.pdf');
     }
 
@@ -81,6 +83,7 @@ class ReporteController extends Controller
 
         // return view('admin.reporte.archivos-pdf.pdffactura',['datos' => $datos,'procedimientos' => $procedimientos]);
         $pdf = PDF::loadView('admin.reporte.archivos-pdf.pdffactura',['datos' => $datos,'procedimientos' => $procedimientos]);
+        $pdf->setOptions(['isRemoteEnabled' => true, 'isJavascriptEnabled' => true, 'isHtml5ParserEnabled' => true]);
         return $pdf->download('Ganancias.pdf');
    }
 }
