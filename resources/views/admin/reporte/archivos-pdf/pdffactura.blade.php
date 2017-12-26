@@ -24,6 +24,9 @@
 
 <div class="container-fluid col-lg-8" id="page" style="width: 700px !important; margin: 0 auto; ">
   <br>
+  <div  style="height: 60px; display: block; margin-left: 300px;">
+ 		<img src="imagen/logo_big.png" style="margin: 0 auto; display: block;" width="130" alt=""/>
+ 	</div>
   <h4 style="font-size: 22px !important; font-family: inherit !important" class="page-title">Laboratorio Clinico Dr. Garcia</h4>
   <p></p>
   <hr/>
