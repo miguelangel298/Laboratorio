@@ -39,7 +39,7 @@ class AdminController extends Controller
     public function PrintFactura($IdFactura){
         $datos  = DB::SELECT(DB::raw("CALL SELECT_FacturaByIdFactura('$IdFactura')"));
         $procedimientos = DB::SELECT(DB::raw("CALL SELECT_FacturaDetallesByIdFactura('$IdFactura')"));
-        return view('admin.reporte.archivos-pdf.pdffactura',['datos' => $datos,'procedimientos' => $procedimientos]);
+        return view('admin.reporte.archivos-pdf.printfactura',['datos' => $datos,'procedimientos' => $procedimientos]);
 
     }
 
