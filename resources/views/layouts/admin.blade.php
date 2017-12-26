@@ -31,9 +31,9 @@
     <!-- Logo -->
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">Dr<b>G</b></span>
+      <span class="logo-mini"><img src="/imagen/Iconolab.ico" width="25"/></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Lab </b>Dr. García</span>
+      <span class="logo-lg"><img src="/imagen/logo_big.png" width="120"/></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
