@@ -12,12 +12,12 @@ Laboratorio | Agregar Paciente
 
 <section class="content-header">
       <h1>
-       Clientes
+       Pacientes
         <small>Agregar</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-bullseye"></i> Inicio</a></li>
-        <li class="active">Clientes</li>
+        <li class="active">Pacientes</li>
       </ol>
 </section><br>
 
@@ -25,7 +25,7 @@ Laboratorio | Agregar Paciente
 	<div class="col-lg-12">
 		<div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Agregar nuevo Clientes</h3>
+          <h3 class="box-title">Agregar nuevo Pacientes</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
