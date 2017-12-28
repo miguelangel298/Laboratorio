@@ -68,7 +68,10 @@ class ReporteController extends Controller
 
    public function ObtenerFactura($IdFactura){
     	$datos  = DB::SELECT(DB::raw("CALL SELECT_FacturaByIdFactura('$IdFactura')"));
-    	return Response()->json($datos[0]);
+      if (count($datos)) {
+        return Response()->json($datos[0]);
+      }
+      return response()->json(['error' => 'no_existe']);
    }
 
    public function ObtenerDetalleFactura($IdFactura){
