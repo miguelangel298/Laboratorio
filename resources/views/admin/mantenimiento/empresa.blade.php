@@ -103,7 +103,10 @@ Laboratorio | Sucursales
                   <div id="DivSG">
                     <select id="IdMunicipio" class="form-control select2" style="width: 100%;">
                     <option selected="selected" disabled="">Seleccione Municipio</option>
-                    <option value="1">Pedro Brand</option>
+                    @foreach($provices as $provice)
+                    <option value="{{$provice->IdMunicipio}}">{{$provice->Nombre}}</option>
+
+                    @endforeach
                     <option value="2">Naco</option>
                   </select>
                   </div>
