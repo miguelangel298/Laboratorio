@@ -93,8 +93,6 @@ address {
           <td>{{$Ganancia->Caja}}</td>
           <td >{{$Ganancia->Fecha}} </td>
           <td >{{$Ganancia->IdFactura}} </td>
-
-          <td>{{$Ganancia->Procedimiento}}</td>
           <td class="text-right">{{$Ganancia->Simbolo}} {{$Ganancia->Costo}}</td>
         </tr>
 	@endforeach
