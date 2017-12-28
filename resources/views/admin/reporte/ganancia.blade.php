@@ -113,7 +113,6 @@ Laboratorio | Reporte Ganancia
                   <th>Caja</th>
                   <th>Fecha</th>
                   <th>Nº Factura</th>
-                  <th>Procedimiento</th>
                   <th>Costo</th>
                 </tr>
                 </thead>

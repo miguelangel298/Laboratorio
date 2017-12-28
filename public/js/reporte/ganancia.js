@@ -56,7 +56,7 @@ $("#BuscarReporteGanancia").click(function(e){
       $.get(route, function(data){
         if(data != ""){
           $(data).each(function(key,value){
-            TablaDatos.append('<tr><td>'+value.Sucursal+'</td><td>'+value.Caja+'</td><td>'+value.Fecha+'</td><td>'+value.IdFactura+'</td><td>'+value.Procedimiento+'</td><td class="costo">'+value.Costo+'</td></tr>')
+            TablaDatos.append('<tr><td>'+value.Sucursal+'</td><td>'+value.Caja+'</td><td>'+value.Fecha+'</td><td>'+value.IdFactura+'</td><td class="costo">'+value.Costo+'</td></tr>')
           });
           $('#TablaDeGanancia').DataTable();
 
