@@ -94,8 +94,9 @@
                 <div id="DivNc">
                 	<select id="IdNacionalidad" class="form-control select2" style="width: 100%;">
 	                  <option selected="selected" disabled="">Seleccione Nacionalidad</option>
-	                  <option value="1">Republica Dom</option>
-	                  <option value="2">USA</option>
+                    @foreach($naciones as $nacion)
+                    <option value="{{$nacion->IdNacionalidades}}">{{$nacion->Nombre}}</option>
+                    @endforeach
 	                </select>
                 </div>
               </div>

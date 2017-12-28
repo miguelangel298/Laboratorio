@@ -99,7 +99,7 @@
             <li class="{{ Request::is('mantenimiento/clientes') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/clientes')!!}"><i class="fa fa-circle-o"></i> Nuevo Paciente</a></li>
             <li class="{{ Request::is('mantenimiento/procedimiento') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/procedimiento')!!}"><i class="fa fa-circle-o"></i> Procedimientos</a></li>
             <li class="{{ Request::is('mantenimiento/empleado') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empleado')!!}"><i class="fa fa-circle-o"></i> Empleados</a></li>
-            <li class="{{ Request::is('mantenimiento/empresa') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empresa')!!}"><i class="fa fa-circle-o"></i>Mis Empresas</a></li>
+            <li class="{{ Request::is('mantenimiento/empresa') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empresa')!!}"><i class="fa fa-circle-o"></i>Sucursales</a></li>
           </ul>
         </li>
         <li class=" {{ Request::is('reporte*') ? 'active' : ''}} treeview">

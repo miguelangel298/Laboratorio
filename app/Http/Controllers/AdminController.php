@@ -33,7 +33,9 @@ class AdminController extends Controller
 
         $clientes = DB::SELECT("CALL SELECT_FiltroPaciente()");
         $procedimientos = DB::SELECT("SELECT p.Nombre, p.IdProcedimiento  FROM procedimientos p");
-        return view ('admin.facturas.factura',compact('procedimientos','clientes'));
+        $naciones = DB::select("SELECT nacionalidades.IdNacionalidades, nacionalidades.Nombre from nacionalidades
+  ");
+        return view ('admin.facturas.factura',compact('procedimientos','clientes','naciones'));
     }
 
     public function PrintFactura($IdFactura){

@@ -32,7 +32,7 @@ Laboratorio | Reporte Ganancia
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">
-                <div id="DivS">
+                <div id="DivM">
                   <select class="form-control select2" id="IdMoneda" style="width: 100%;">
                     <option selected="selected" disabled>Tipo de Moneda</option>
                     <option value="1" >RD$</option>
@@ -47,7 +47,7 @@ Laboratorio | Reporte Ganancia
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <div id="DivF">
+                  <div id="DivD">
                     <input type="text" id="desde" placeholder="AAAA-MM-DD" class="form-control pull-right" >
                   </div>
                 </div>
@@ -59,7 +59,7 @@ Laboratorio | Reporte Ganancia
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <div id="DivF">
+                  <div id="DivH">
                     <input type="text" id="hasta" placeholder="AAAA-MM-DD" class="form-control pull-right" >
                   </div>
                 </div>
@@ -84,7 +84,7 @@ Laboratorio | Reporte Ganancia
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-         <button type="button" type="submit" id="AgregarCliente" class="btn btn-primary pull-right"> Buscar</button>
+         <button type="button" type="button" id="BuscarReporteGanancia" class="btn btn-primary pull-right"> Buscar</button>
         </div>
 </div>
   </div>
@@ -113,7 +113,6 @@ Laboratorio | Reporte Ganancia
                   <th>Caja</th>
                   <th>Fecha</th>
                   <th>Nº Factura</th>
-                  <th>Procedimiento</th>
                   <th>Costo</th>
                 </tr>
                 </thead>
