@@ -9,7 +9,7 @@ $("#BuscarFacturaForm").submit(function(e){
 	var routeDetalle = "/reporte/detalle-factura/"+IdFactura+"";
 	var contenedorDatos = $("#contenedorDatos").empty();
 	$.get(route,function(data){
-		if(data != ""){
+		if(data != "" && !data.error){
 			$("#ContenedorTabla").show();
 			contenedorDatos.append("<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><address><strong>"+data.Paciente+"</strong><br>Cedula: "+data.Cedula+"<br>Estado: "+data.Estado+"</address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'> <address><strong>Edad: "+data.Edad+"</strong><br>Fecha de Nacimiento<br>"+data.FechaNacimineto+"<br></address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><b>Numero de Seguro:</b><br>#"+data.SeguroMedico+"<br><b>Telefono:</b> "+data.Telefono+"<br></div></div><hr> ");
 				$("#dinero").html(data.Total);
@@ -19,7 +19,7 @@ $("#BuscarFacturaForm").submit(function(e){
 				$("#Fecha").html(data.Fecha);
 				$("#Sucursal").html(data.Sucursal);
 			}else{
-				alertify.error('No hay');
+				alertify.error('Factura no encontrada');
 			}
 	});
 
