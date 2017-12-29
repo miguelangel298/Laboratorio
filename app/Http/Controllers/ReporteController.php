@@ -8,6 +8,10 @@ use PDF;
 class ReporteController extends Controller
 {
 
+  public function __construct()
+    {
+       $this->middleware('auth');
+    }
    public function ganancias(){
    		$sucursales = DB::SELECT("SELECT IdSucursal, Nombre from sucursales");
    		return view('admin.reporte.ganancia',compact('sucursales'));
