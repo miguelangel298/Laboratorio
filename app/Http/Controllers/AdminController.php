@@ -86,7 +86,7 @@ class AdminController extends Controller
     }
 
     public function DatosFacturaCliente($cedula){
-        $datos = DB::SELECT("SELECT_PersonaDatoFacturaByIdPersona('$cedula')");
+        $datos = DB::SELECT("call SELECT_PersonaDatoFacturaByIdPersona('$cedula')");
         if($datos != null){
         return Response()->json($datos[0]);
         }else{
