@@ -631,7 +631,6 @@ GenerarFactura =  function(IdTipo) {
 	var ModificadoPorF = $("#ModificadoPor").val();
 	var route = "/factura-generar";
 	var monto = $("#abonoMonto").val();
-	console.log(Total);
 
 	if($("#ModificadoPor").val() != ""){
 	$.ajax({

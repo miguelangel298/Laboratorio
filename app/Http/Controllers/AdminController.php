@@ -63,12 +63,12 @@ class AdminController extends Controller
         $Monto = $request->input('Monto');
         $guardar  = DB::SELECT(DB::raw("CALL INSERT_Factura('$IdPersona','$IdMoneda','$IdTipoPago' ,'$Total','$Itbis','$Descuento','$TotalPagar','$ModificadoPor','$IdSucursal')"));
 
-        if($Monto != ""){
-          $IdFactura = DB::SELECT("SELECT max(factura.IdFactura) as IdFactura from factura");
-          $IdFacturaId = $IdFactura[0]->IdFactura;
-          $this->abonoFactura($IdFacturaId,$Monto);
+        if($Monto == ""){
+          $Monto = $TotalPagar;
         }
-
+        $IdFactura = DB::SELECT("SELECT max(factura.IdFactura) as IdFactura from factura");
+        $IdFacturaId = $IdFactura[0]->IdFactura;
+        $this->abonoFactura($IdFacturaId,$Monto);
         return response()->json(["mensaje"=>"Creado"]);
     }
 
