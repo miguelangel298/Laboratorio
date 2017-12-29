@@ -14,10 +14,18 @@ class HasPermission
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $currentCargo1 = "", $currentCargo2 = "", $currentCargo3 = "")
     {
         $IdCargo = Auth::user()->IdCargo;
         $request['IdCargo'] = $IdCargo;
+
+        if ($currentCargo1 != "") {
+          if ($IdCargo == $currentCargo1 || $IdCargo == $currentCargo2 || $IdCargo == $currentCargo3) {
+            return $next($request);
+          } else {
+            return redirect('/');
+          }
+        }
         return $next($request);
     }
 }
