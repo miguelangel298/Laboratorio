@@ -12,7 +12,7 @@
 <section class="content-header">
       <h1>
         Inicio
-        <small>Panel de control</small>
+        <small>Panel de control {{ request()->IdCargo }}</small>
       </h1>
     </section>
 

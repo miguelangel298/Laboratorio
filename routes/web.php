@@ -13,7 +13,7 @@
 |
 */
 
-Route::group(['middleware' =>['auth']],function(){
+Route::group(['middleware' =>['auth', 'HasPermission']],function(){
 
 
 Route::get('/', 'AdminController@Inicio');
