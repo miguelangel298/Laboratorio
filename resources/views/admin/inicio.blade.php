@@ -12,7 +12,7 @@
 <section class="content-header">
       <h1>
         Inicio
-        <small>Panel de control {{ request()->IdCargo }}</small>
+        <small>Panel de control</small>
       </h1>
     </section>
 
@@ -31,7 +31,11 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="#" class="small-box-footer">- </a>
+            @if (request()->IdCargo != 2)
+              <a href="/factura-listado" class="small-box-footer">Ver Todas <i class="fa fa-arrow-circle-right"></i></a>
+            @else
+              <a href="#" class="small-box-footer"> - </a>
+            @endif
           </div>
         </div>
         <!-- ./col -->
@@ -39,14 +43,17 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-              <p>Ganacias sobre mes anterior</p>
+              <h3 id="ProcTotalText">0</h3>
+              <p>Procedimientos registrados</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer"> - </a>
+            @if (request()->IdCargo != 2)
+              <a href="/mantenimiento/procedimiento" class="small-box-footer">Ver Todos <i class="fa fa-arrow-circle-right"></i></a>
+            @else
+              <a href="#" class="small-box-footer"> - </a>
+            @endif
           </div>
         </div>
         <!-- ./col -->
@@ -55,13 +62,12 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <h3 id="PacientesTotalText">0</h3>
-
               <p>Pacientes registrados</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer"> - </a>
+            <a href="/pacientes-list" class="small-box-footer">Ver Todos <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

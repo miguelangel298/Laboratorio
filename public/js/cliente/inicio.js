@@ -12,6 +12,15 @@ IdDivisa = 0;
     });
   }
 
+  obtenerTotalProc = function(){
+    route = '/procedimientos-total';
+    $.get(route, function(res){
+      procTotal = res.Total;
+      $('#ProcTotalText').html(procTotal);
+    });
+  }
+
+
   updateDollarValor = function (valor) {
     route = '/divisas/actualizar';
     $.post({
@@ -37,6 +46,7 @@ IdDivisa = 0;
   });
 
   obtenerUltimoDollar();
+  obtenerTotalProc();
 
   $.get('/pacientes/total', function (res) {
     $('#PacientesTotalText').html(res.Total);
