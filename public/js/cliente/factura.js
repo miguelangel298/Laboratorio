@@ -126,7 +126,7 @@ ObtenerCliente = function (IdPacienteDatos) {
 			$("#informacion").hide();
 			$("#contenidoFactura").show();
 			$("#contenedorDatos").show();
-			$("#contenedorDatos").html("<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><address><strong>"+data.Nombre+"</strong><br>Cedula: "+data.Cedula+"<br>Correo: "+data.Correo+"</address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'> <address><strong>"+data.IdNacionalidad+"</strong><br>Fecha de Nacimiento<br>"+data.FechaNacimineto+"<br></address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><b>Numero de Seguro:</b><br>#"+data.SeguroMedico+"<br><b>Telefono:</b> "+data.Celular+"<br></div></div><hr> ");
+			$("#contenedorDatos").html("<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><address><strong>Nombre: </strong>"+data.Nombre+"<br><strong>Cedula: </strong>"+data.Cedula+"<br><strong>Correo:</strong> "+data.Correo+"</address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'> <address><strong>Nacionalidad: </strong>"+data.IdNacionalidad+"<br><strong>Fecha de Nacimiento: </strong>"+data.FechaNacimineto.substr(0, 10) +"<br><strong>Sexo: </strong>"+data.Sexo +"<br></address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><b>Seguro de Salud: </b>"+data.SeguroMedico+"<br><b>No. de Afiliado: </b>"+data.NumeroSeguro+"<br><b>Telefono:</b> "+data.Celular+"<br></div></div><hr>");
 			$("#IdCliente").val(data.IdPersona);
 			IdPersona = data.IdPersona;
 		}
