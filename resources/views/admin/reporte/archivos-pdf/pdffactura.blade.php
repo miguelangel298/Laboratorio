@@ -24,7 +24,7 @@
 
 <div class="container-fluid col-lg-8" id="page" style="width: 700px !important; margin: 0 auto; ">
   <br>
-  <div  style="height: 60px; display: block; margin-left: 300px;">
+  <div  style="height: 60px; display: block; ">
  		<img src="imagen/logo_big.png" style=" display: block;" width="130" alt=""/>
  	</div>
   <h4 style="font-size: 22px !important; font-family: inherit !important" class="page-title">Laboratorio Clinico Dr. Garcia</h4>
@@ -38,10 +38,20 @@
         <p></p><strong>Estado</strong><br/><span> {{$dato->Estado}}</span>
       </div>
       <div class="col-sm-4" style="width: 230px; float: left; margin: auto;text-align: all;"><strong>Cajero</strong><br/><span>{{$dato->Usuario}}</span>
-        <p></p><strong>Seguro Medico: </strong><br/><span>{{$dato->SeguroMedico}}</span>
+        <p></p><strong>Seguro Medico: </strong><br/>
+        @if($dato->SeguroMedico == null)
+        <span>Sin seguro.</span>
+        @else
+        <span>{{$dato->SeguroMedico}}</span>
+        @endif
         <p></p><strong>Fecha de Nacimiento</strong><br/><span>{{$dato->FechaNacimineto}}</span>
       </div>
-      <div class="col-sm-4" style="width: 230px; float: left;"><strong>Numero de Seguro</strong><br/><span>{{$dato->NumeroSeguro}}</span>
+      <div class="col-sm-4" style="width: 230px; float: left;"><strong>Numero de Seguro</strong><br/>
+      @if($dato->NumeroSeguro == null)
+      <span>Sin seguro.</span>
+      @else
+      <span>{{$dato->NumeroSeguro}}</span>
+      @endif
         <p></p><strong>Telefono</strong><br/><span>{{$dato->Telefono}}</span>
       </div>
     </div>

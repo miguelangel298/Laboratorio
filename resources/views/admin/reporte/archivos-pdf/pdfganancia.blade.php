@@ -66,7 +66,7 @@ address {
 </head>
 <body>
 <div class="container-fluid col-lg-8" id="page">
-  <div  style="height: 60px; display: block;  margin-left: 320px;">
+  <div  style="height: 60px; display: block; ">
  		<img src="imagen/logo_big.png" style="display: block;" width="130" alt=""/>
  	</div>
   <h4 class="page-title">Laboratorio Clinico Dr. Garcia  </h4>
