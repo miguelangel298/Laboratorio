@@ -31,6 +31,9 @@ Route::post('/paciente/update', 'MantenimientoController@UpdatePaciente')->name(
 
 Route::get('/paciente-mostrar/{IdPersona}', 'MantenimientoController@PacienteMostrar')->name('PacienteMostrar')->middleware('HasPermission:1,2,3');
 
+
+Route::get('/procedimientos-total', 'AdminController@obtenerTotalProcedimientos')->name('ProcedimientosTotal')->middleware('HasPermission:1,2,3');
+
 Route::get('/obtener/personas', 'MantenimientoController@ObtenerCliente')->name('ObtenerCliente')->middleware('HasPermission:1,2,3');
 
 Route::get('/pacientes-list', 'MantenimientoController@ListadoPaciente')->name('ListadoPaciente')->middleware('HasPermission:1,2,3');
