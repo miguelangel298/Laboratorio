@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>PDF Factura</title>
-{{--   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> --}}
+{{--   <link rel="stylesheet" type="text/css" href="css/bootstrap/dist/css/bootstrap.min.css"> --}}
   <style type="text/css">
 
     body {
@@ -67,7 +67,7 @@ address {
 <body>
 <div class="container-fluid col-lg-8" id="page">
   <div  style="height: 60px; display: block;  margin-left: 320px;">
- 		<img src="imagen/logo_big.png" style="margin: 0 auto; display: block;" width="130" alt=""/>
+ 		<img src="imagen/logo_big.png" style="display: block;" width="130" alt=""/>
  	</div>
   <h4 class="page-title">Laboratorio Clinico Dr. Garcia  </h4>
   <p></p>
