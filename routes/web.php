@@ -13,12 +13,12 @@
 |
 */
 
+Route::group(['middleware' =>['auth']],function(){
+
 
 Route::get('/', 'AdminController@Inicio');
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+// Route::get('/home', 'HomeController@index')->name('home');
 
 			// AREA DE CLIENTES Y PERSONAS //
 Route::get('/mantenimiento/clientes', 'MantenimientoController@Cliente')->name('clientes');
@@ -137,3 +137,9 @@ Route::get('/chart/ingresos', 'AdminController@ObtenerIngresosUltimoAnio')->name
 Route::get('/pacientes/total', 'AdminController@ObtenerTotalPacientes')->name('ObtenerTotalFacturaPorSucursal');
 
 Route::get('/facturas/total', 'AdminController@ObtenerTotalFacturaPorSucursal')->name('ObtenerTotalPacientes');
+
+});
+
+Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
+Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
