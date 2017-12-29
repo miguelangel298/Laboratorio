@@ -247,6 +247,7 @@ function getSuma() {
 	var sum = 0;
 	procedimientos.forEach(function (proc) {
 		sum += proc.precio;
+		suma = sum;
 	});
 
 	$("#dinero").html(roundNumber(sum, 2));
@@ -265,6 +266,8 @@ function getSuma() {
    $("#total").html( roundNumber(total, 2));
      TotalPagar = total;
 		 $('#montoTotalAbono').html(roundNumber(total, 2));
+
+
 }
 
 $('#abonoMonto').keypress(function (evt) {
@@ -628,6 +631,7 @@ GenerarFactura =  function(IdTipo) {
 	var ModificadoPorF = $("#ModificadoPor").val();
 	var route = "/factura-generar";
 	var monto = $("#abonoMonto").val();
+	console.log(Total);
 
 	if($("#ModificadoPor").val() != ""){
 	$.ajax({
