@@ -86,11 +86,7 @@ class AdminController extends Controller
     }
 
     public function DatosFacturaCliente($cedula){
-        $datos = DB::SELECT("SELECT  CONCAT(personas.Nombres,' ',personas.Apellido1,' ',personas.Apellido2) AS Nombre,personas.Sexo, personas.Cedula,personas.Correo,nacionalidades.Nombre as IdNacionalidad,personas.FechaNacimineto,personas.Celular, pacientes.SeguroMedico,pacientes.NumeroSeguro, pacientes.IdPersona
-                                                from    personas inner JOIN
-                                                        nacionalidades ON nacionalidades.IdNacionalidades = personas.IdNacionalidad inner join
-                                                        pacientes on pacientes.IdPersona = personas.Idpersona
-                                                where   personas.Idpersona = '$cedula'");
+        $datos = DB::SELECT("SELECT_PersonaDatoFacturaByIdPersona('$cedula')");
         if($datos != null){
         return Response()->json($datos[0]);
         }else{
