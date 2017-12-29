@@ -38,21 +38,24 @@
         <p></p><strong>Estado</strong><br/><span> {{$dato->Estado}}</span>
       </div>
       <div class="col-sm-4" style="width: 230px; float: left; margin: auto;text-align: all;"><strong>Cajero</strong><br/><span>{{$dato->Usuario}}</span>
-        <p></p><strong>Seguro Medico: </strong><br/>
-        @if($dato->SeguroMedico == null)
-        <span>Sin seguro.</span>
-        @else
-        <span>{{$dato->SeguroMedico}}</span>
-        @endif
+          <p></p><strong>Telefono</strong><br/><span>{{$dato->Telefono}}</span>
+
         <p></p><strong>Fecha de Nacimiento</strong><br/><span>{{$dato->FechaNacimineto}}</span>
       </div>
-      <div class="col-sm-4" style="width: 230px; float: left;"><strong>Numero de Seguro</strong><br/>
+      <div class="col-sm-4" style="width: 230px; float: left;">
+      <p></p><strong>Seguro Medico: </strong><br/>
+      @if($dato->SeguroMedico == null)
+      <span>Sin seguro.</span>
+      @else
+      <span>{{$dato->SeguroMedico}}</span>
+      @endif
+      <strong>Numero de Seguro</strong><br/>
       @if($dato->NumeroSeguro == null)
       <span>Sin seguro.</span>
       @else
       <span>{{$dato->NumeroSeguro}}</span>
       @endif
-        <p></p><strong>Telefono</strong><br/><span>{{$dato->Telefono}}</span>
+
       </div>
     </div>
   </div>
