@@ -50,6 +50,14 @@ class AdminController extends Controller
        return response()->json($datos[0]);
     }
 
+    public function obtenerTotalProcedimientos(){
+        $datos = DB::SELECT("SELECT COUNT(*) as Total from procedimientos");
+        if (count($datos)) {
+          return response()->json($datos[0]);
+        }
+        return responnse()->json(['Total' => 0]);
+    }
+
     public function CrearFactura(Request $request){
         $IdPersona = $request->input('IdPersona');
         $IdMoneda = $request->input('IdMoneda');
