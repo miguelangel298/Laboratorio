@@ -31,7 +31,7 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            @if (request()->IdCargo != 2)
+            @if (request()->CurrentCargo != 2)
               <a href="/factura-listado" class="small-box-footer">Ver Todas <i class="fa fa-arrow-circle-right"></i></a>
             @else
               <a href="#" class="small-box-footer"> - </a>
@@ -49,7 +49,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            @if (request()->IdCargo != 2)
+            @if (request()->CurrentCargo != 2)
               <a href="/mantenimiento/procedimiento" class="small-box-footer">Ver Todos <i class="fa fa-arrow-circle-right"></i></a>
             @else
               <a href="#" class="small-box-footer"> - </a>

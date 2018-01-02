@@ -17,7 +17,7 @@ class HasPermission
     public function handle($request, Closure $next, $currentCargo1 = "", $currentCargo2 = "", $currentCargo3 = "")
     {
         $IdCargo = Auth::user()->IdCargo;
-        $request['IdCargo'] = $IdCargo;
+        $request['CurrentCargo'] = $IdCargo;
 
         if ($currentCargo1 != "") {
           if ($IdCargo == $currentCargo1 || $IdCargo == $currentCargo2 || $IdCargo == $currentCargo3) {
