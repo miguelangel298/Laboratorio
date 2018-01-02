@@ -125,8 +125,7 @@ class MantenimientoController extends Controller
         $IdCargo = $request->input('IdCargo');
         $Pass = bcrypt($request->input('Pass'));
         $token = "";
-        $emial = "";
-        $guardar  = DB::SELECT(DB::raw("CALL INSERT_PersonaEmpleado('$Cedula','$Nombres','$Apellido1','$Apellido2','$FechaNacimineto','$IdNacionalidad',' $IdSexo','$Telefono','$Celular','$Correo','$IdUser','$Pass','$emial','$token','$IdCargo','$IdSucursal')"));
+        $guardar  = DB::SELECT(DB::raw("CALL INSERT_PersonaEmpleado('$Cedula','$Nombres','$Apellido1','$Apellido2','$FechaNacimineto','$IdNacionalidad',' $IdSexo','$Telefono','$Celular','$Correo','$IdUser','$Pass','$token','$IdCargo','$IdSucursal')"));
         return response()->json([
                 "mensaje"=>"Creado"
                 ]);
