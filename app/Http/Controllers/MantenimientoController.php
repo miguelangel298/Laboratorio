@@ -56,9 +56,8 @@ class MantenimientoController extends Controller
     public function CrearProcedimiento(Request $request){
 		$nombre = $request->input('Nombre');
 		$costo = $request->input('CostoPeso');
-		$CostoDolar = $request->input('CostoDolar');
-		$IdUser = $request->input('IdUser');
-    	$guardar  = DB::SELECT(DB::raw("CALL INSERT_Procedimiento('$nombre','$costo','$CostoDolar','$IdUser')"));
+		$IdUser = Auth::user()->IdPersona;
+    $guardar  = DB::SELECT(DB::raw("CALL INSERT_Procedimiento('$nombre','$costo','$IdUser')"));
     	return response()->json([
                 "mensaje"=>"Creado"
                 ]);
@@ -82,10 +81,9 @@ class MantenimientoController extends Controller
     public function EditarProcedimiento(Request $request){
 		$nombre = $request->input('Nombre');
 		$costo = $request->input('CostoPeso');
-		$CostoDolar = $request->input('CostoDolar');
 		$IdProcedimiento = $request->input('IdProcedimiento');
-		$IdUser = $request->input('IdUser');
-    	$guardar  = DB::SELECT(DB::raw("CALL UPDATE_Procedimiento('$nombre','$costo','$CostoDolar','$IdProcedimiento','$IdUser')"));
+		$IdUser = Auth::user()->IdPersona;
+    	$guardar  = DB::SELECT(DB::raw("CALL UPDATE_Procedimiento('$nombre','$costo','$IdProcedimiento','$IdUser')"));
     	return response()->json([
                 "mensaje"=>"Creado"
                 ]);
