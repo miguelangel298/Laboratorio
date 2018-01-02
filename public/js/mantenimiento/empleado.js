@@ -65,7 +65,8 @@ function validarData(){
 	 form.Celular = $("#Celular").val();
 	 form.Telefono = $("#Telefono").val();
 	 form.route = "/mantenimiento/empleado/update";
-	if(IdSucursal != "" && IdCargo != ""  && IdSexo != "" && IdNacionalidad != "" && $("#Nombres").val() != "" && $("#Apellidos").val() != "" && $("#Cedula").val() != "" && $("#FechaNacimineto").val() != "" && $("#Celular").val() != ""  ){
+	if(IdSucursal != "" && IdCargo != ""  && IdSexo != "" && IdNacionalidad != "" && $("#Nombres").val() != "" && $("#Apellidos").val() != "" && $("#Cedula").val() != "" && $("#FechaNacimineto").val() != ""
+	&& $("#Celular").val() !=""){
 	 	return form;
 	} else {
 		return null;
@@ -181,7 +182,8 @@ $("#AgregarEmpleado").click(function(e){
 	var Telefono = $("#Telefono").val();
 	var Pass = $("#Pass").val();
 	var route = "/mantenimiento/empleado/crear";
-	if(IdSucursal != "" && IdCargo != ""  && IdSexo != "" && IdNacionalidad != "" && $("#Nombres").val() != "" && $("#Apellidos").val() != "" && $("#Cedula").val() != "" && $("#FechaNacimineto").val() != "" && $("#Celular").val() != ""  ){
+	if(IdSucursal != "" && IdCargo != ""  && IdSexo != "" && IdNacionalidad != "" && $("#Nombres").val() != "" && $("#Apellidos").val() != "" && $("#Cedula").val() != "" && $("#FechaNacimineto").val() != ""
+  ){
 		$.ajax({
 		url:route,
 		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -211,7 +213,7 @@ $("#AgregarEmpleado").click(function(e){
 		}
 	});
 	}else{
-
+		ValidarInput();
 	}
 
 
