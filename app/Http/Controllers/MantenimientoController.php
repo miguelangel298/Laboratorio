@@ -19,8 +19,8 @@ class MantenimientoController extends Controller
 
     //--------------------AREA DE CLIENTE-------------------------
     public function Cliente(){
-
-    	return view('admin.mantenimiento.personas');
+      $nacionalidad = DB::SELECT("SELECT nacionalidades.IdNacionalidades, nacionalidades.Nombre from nacionalidades");
+    	return view('admin.mantenimiento.personas',compact('nacionalidad'));
     }
 
     public function CrearCliente(Request $request){
