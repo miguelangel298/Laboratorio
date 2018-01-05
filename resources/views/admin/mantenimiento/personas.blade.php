@@ -174,7 +174,7 @@ Laboratorio | Agregar Paciente
                     <i class="fa fa-id-card-o"></i>
                   </div>
                   <div id="DivNS">
-                    <input type="text" id="NumeroSeguro" class="form-control" style="width: 100%;">
+                    <input type="text" placeholder="No. de Afiliado" id="NumeroSeguro" class="form-control" style="width: 100%;">
                   </div>
                 </div>
                 <!-- /.input group -->
