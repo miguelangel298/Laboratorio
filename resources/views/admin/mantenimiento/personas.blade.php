@@ -112,7 +112,7 @@ Laboratorio | Agregar Paciente
                     <i class="fa fa-calendar"></i>
                   </div>
                   <div id="DivF">
-                  	<input type="text" id="FechaNacimineto" placeholder="AAAA/MM/DD" class="form-control pull-right" >
+                  	<input type="text" id="FechaNacimineto" placeholder="AAAA/MM/DD" class="form-control pull-right date-picker" >
                   </div>
                 </div>
               </div>

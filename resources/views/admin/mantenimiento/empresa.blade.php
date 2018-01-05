@@ -88,7 +88,7 @@ Laboratorio | Sucursales
                     <i class="fa fa-calendar"></i>
                   </div>
                   <div id="DivF">
-                    <input type="text" id="AnoApertura" placeholder="2000" class="form-control pull-right" >
+                    <input type="text" id="AnoApertura" placeholder="2000" class="form-control pull-right date-picker" autocomplete="off" >
                   </div>
                 </div>
               </div>

@@ -45,6 +45,17 @@ Laboratorio | Empleado
 
             <div class="col-md-6">
             <input type="hidden" id="IdUser" name="IdUser" value="{{ Auth::user()->IdUser }}">
+                <div class="form-group">
+                <label>Cedula:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-address-card"></i>
+                  </div>
+                  <div id="DivC">
+                  <input type="text" id="Cedula" name="Cedula" class="form-control" placeholder="999-9999999-9" data-inputmask='"mask": "999-9999999-9"' data-mask>
+                  </div>
+                </div>
+              </div>
                <div class="form-group">
                 <label>Nombre:</label>
                 <div class="input-group">
@@ -56,7 +67,7 @@ Laboratorio | Empleado
                   </div>
                 </div>
               </div>
-               <div class="form-group">
+              <div class="form-group">
                 <label>Primer Apellido:</label>
                 <div class="input-group">
                   <div class="input-group-addon">
@@ -78,7 +89,19 @@ Laboratorio | Empleado
                 </div>
                 </div>
               </div>
-               <div class="form-group">
+
+              <div class="form-group">
+                <label>Correo:</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
+                  </div>
+                  <div id="DivE">
+                     <input type="text" placeholder="ejemplo@gmail.com" class="form-control" id="Correo" name="Correo">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
                 <label>Sexo:</label>
                 <div class="input-group">
                   <div class="input-group-addon">
@@ -93,29 +116,6 @@ Laboratorio | Empleado
                 </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label>Correo:</label>
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-envelope"></i>
-                  </div>
-                  <div id="DivE">
-                     <input type="text" placeholder="ejemplo@gmail.com" class="form-control" id="Correo" name="Correo">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Cedula:</label>
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-address-card"></i>
-                  </div>
-                  <div id="DivC">
-                  <input type="text" id="Cedula" name="Cedula" class="form-control" placeholder="999-9999999-9" data-inputmask='"mask": "999-9999999-9"' data-mask>
-                  </div>
-                </div>
-              </div>
-
               <div class="form-group hiddenUp">
                 <label>Contraseña:</label>
                 <div class="input-group">
@@ -148,7 +148,7 @@ Laboratorio | Empleado
                     <i class="fa fa-calendar"></i>
                   </div>
                   <div id="DivF">
-                    <input type="text" name="FechaNacimineto" id="FechaNacimineto" placeholder="AAAA/MM/DD" class="form-control pull-right" >
+                    <input type="text" name="FechaNacimineto" autocomplete="off" id="FechaNacimineto" placeholder="AAAA/MM/DD" class="form-control pull-right date-picker" >
                   </div>
                 </div>
               </div>

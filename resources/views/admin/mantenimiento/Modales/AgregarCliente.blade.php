@@ -85,7 +85,7 @@
                     <i class="fa fa-calendar"></i>
                   </div>
                   <div id="DivF">
-                  	<input type="text" id="FechaNacimineto" placeholder="2000/00/00" class="form-control pull-right" >
+                  	<input type="text" id="FechaNacimineto" placeholder="2000/00/00" class="form-control pull-right date-picker" autocomplete="off" >
                   </div>
                 </div>
               </div>
