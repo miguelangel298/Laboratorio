@@ -33,19 +33,29 @@ class AdminController extends Controller
 
         $clientes = DB::SELECT("CALL SELECT_FiltroPaciente()");
         $procedimientos = DB::SELECT("SELECT p.Nombre, p.IdProcedimiento  FROM procedimientos p");
-        return view ('admin.facturas.factura',compact('procedimientos','clientes'));
+        $naciones = DB::select("SELECT nacionalidades.IdNacionalidades, nacionalidades.Nombre from nacionalidades
+  ");
+        return view ('admin.facturas.factura',compact('procedimientos','clientes','naciones'));
     }
 
     public function PrintFactura($IdFactura){
         $datos  = DB::SELECT(DB::raw("CALL SELECT_FacturaByIdFactura('$IdFactura')"));
         $procedimientos = DB::SELECT(DB::raw("CALL SELECT_FacturaDetallesByIdFactura('$IdFactura')"));
-        return view('admin.reporte.archivos-pdf.pdffactura',['datos' => $datos,'procedimientos' => $procedimientos]);
+        return view('admin.reporte.archivos-pdf.printfactura',['datos' => $datos,'procedimientos' => $procedimientos]);
 
     }
 
     public function IdFacturaMax(){
         $datos = DB::SELECT("SELECT max(factura.IdFactura) as IdFactura from factura");
        return response()->json($datos[0]);
+    }
+
+    public function obtenerTotalProcedimientos(){
+        $datos = DB::SELECT("SELECT COUNT(*) as Total from procedimientos");
+        if (count($datos)) {
+          return response()->json($datos[0]);
+        }
+        return responnse()->json(['Total' => 0]);
     }
 
     public function CrearFactura(Request $request){
@@ -61,12 +71,12 @@ class AdminController extends Controller
         $Monto = $request->input('Monto');
         $guardar  = DB::SELECT(DB::raw("CALL INSERT_Factura('$IdPersona','$IdMoneda','$IdTipoPago' ,'$Total','$Itbis','$Descuento','$TotalPagar','$ModificadoPor','$IdSucursal')"));
 
-        if($Monto != ""){
-          $IdFactura = DB::SELECT("SELECT max(factura.IdFactura) as IdFactura from factura");
-          $IdFacturaId = $IdFactura[0]->IdFactura;
-          $this->abonoFactura($IdFacturaId,$Monto);
+        if($Monto == ""){
+          $Monto = $TotalPagar;
         }
-
+        $IdFactura = DB::SELECT("SELECT max(factura.IdFactura) as IdFactura from factura");
+        $IdFacturaId = $IdFactura[0]->IdFactura;
+        $this->abonoFactura($IdFacturaId,$Monto);
         return response()->json(["mensaje"=>"Creado"]);
     }
 
@@ -84,12 +94,7 @@ class AdminController extends Controller
     }
 
     public function DatosFacturaCliente($cedula){
-        $datos = DB::SELECT("SELECT  CONCAT(personas.Nombres,' ',personas.Apellido1,' ',personas.Apellido2) AS Nombre, personas.Cedula,personas.Correo,nacionalidades.Nombre as IdNacionalidad,personas.FechaNacimineto,personas.Celular, pacientes.SeguroMedico,pacientes.IdPersona
-                                                from    personas inner JOIN
-                                                        nacionalidades ON nacionalidades.IdNacionalidades =                                                             personas.IdNacionalidad inner join
-                                                        pacientes on pacientes.IdPersona = personas.Idpersona
-
-                                                where   personas.Idpersona = '$cedula'");
+        $datos = DB::SELECT("call SELECT_PersonaDatoFacturaByIdPersona('$cedula')");
         if($datos != null){
         return Response()->json($datos[0]);
         }else{

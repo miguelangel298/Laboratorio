@@ -42,7 +42,7 @@ Laboratorio | Empleado
         <!-- /.box-header -->
         <div class="box-body">
           <div class="row">
-            {!! Form::open(['url'=>'/mantenimiento/empleado/crear','method'=>'POST']) !!}
+
             <div class="col-md-6">
             <input type="hidden" id="IdUser" name="IdUser" value="{{ Auth::user()->IdUser }}">
                <div class="form-group">
@@ -157,8 +157,9 @@ Laboratorio | Empleado
                 <div id="DivNc">
                   <select id="IdNacionalidad" name="IdNacionalidad" class="form-control select2" style="width: 100%;">
                     <option selected="selected" disabled="">Seleccione Nacionalidad</option>
-                    <option value="1">Republica Dom</option>
-                    <option value="2">USA</option>
+                    @foreach($naciones as $nacion)
+                    <option value="{{$nacion->IdNacionalidades}}">{{$nacion->Nombre}}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>
@@ -237,7 +238,6 @@ Laboratorio | Empleado
           </div>
         </div>
 		</div>
-   {!! Form::close() !!}
 			</div>
 		</div>
 

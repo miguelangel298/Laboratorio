@@ -31,9 +31,9 @@
     <!-- Logo -->
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">Dr<b>G</b></span>
+      <span class="logo-mini"><img src="/imagen/Iconolab.ico" width="25"/></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Lab </b>Dr. García</span>
+      <span class="logo-lg"><img src="/imagen/logo_big.png" width="120"/></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -73,21 +73,25 @@
             <i class="fa fa-bullseye"></i> <span>Inicio</span>
           </a>
         </li>
+        @if (request()->CurrentCargo == 1 || request()->CurrentCargo == 3)
         <li class="{{ Request::is('factura') ? 'active' : ''}}">
           <a href="{!! url('/factura')!!}">
             <i class="fa fa-address-card-o"></i> <span>Nueva Factura</span>
           </a>
         </li>
+        @endif
         <li class="{{ Request::is('pacientes-list') ? 'active' : ''}}">
           <a href="{!! url('/pacientes-list')!!}">
             <i class="fa fa-users"></i> <span>Pacientes</span>
           </a>
         </li>
+        @if (request()->CurrentCargo == 1 || request()->CurrentCargo == 3)
         <li class="{{ Request::is('factura-listadt') ? 'active' : ''}}">
           <a href="{!! url('/factura-listado')!!}">
             <i class="fa fa-address-card-o"></i> <span>Listado Facturas</span>
           </a>
         </li>
+        @endif
         <li class=" {{ Request::is('mantenimiento*') ? 'active' : ''}} treeview">
           <a href="#">
             <i class="fa fa-cogs"></i> <span>Mantenimiento</span>
@@ -97,11 +101,16 @@
           </a>
           <ul class="treeview-menu">
             <li class="{{ Request::is('mantenimiento/clientes') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/clientes')!!}"><i class="fa fa-circle-o"></i> Nuevo Paciente</a></li>
+            @if (request()->CurrentCargo == 1 || request()->CurrentCargo == 3)
             <li class="{{ Request::is('mantenimiento/procedimiento') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/procedimiento')!!}"><i class="fa fa-circle-o"></i> Procedimientos</a></li>
+            @endif
+            @if (request()->CurrentCargo == 1)
             <li class="{{ Request::is('mantenimiento/empleado') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empleado')!!}"><i class="fa fa-circle-o"></i> Empleados</a></li>
-            <li class="{{ Request::is('mantenimiento/empresa') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empresa')!!}"><i class="fa fa-circle-o"></i>Mis Empresas</a></li>
+            <li class="{{ Request::is('mantenimiento/empresa') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empresa')!!}"><i class="fa fa-circle-o"></i>Sucursales</a></li>
+            @endif
           </ul>
         </li>
+        @if (request()->CurrentCargo == 1 || request()->CurrentCargo == 3)
         <li class=" {{ Request::is('reporte*') ? 'active' : ''}} treeview">
           <a href="#">
             <i class="fa fa-bar-chart"></i> <span>Reportes</span>
@@ -110,12 +119,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            @if (request()->CurrentCargo == 1)
             <li class="{{ Request::is('reporte/ganancia') ? 'active' : ''}}"><a href="{!! url('/reporte/ganancia')!!}"><i class="fa fa-circle-o"></i> Ganancias</a></li>
-            {{-- <li class="{{ Request::is('mantenimiento/procedimiento') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/procedimiento')!!}"><i class="fa fa-circle-o"></i> Procedimientos</a></li> --}}
+            @endif
             <li class="{{ Request::is('reporte/factura') ? 'active' : ''}}"><a href="{!! url('/reporte/factura')!!}"><i class="fa fa-circle-o"></i> Facturas</a></li>
-            {{-- <li class="{{ Request::is('mantenimiento/empresa') ? 'active' : ''}}"><a href="{!! url('/mantenimiento/empresa')!!}"><i class="fa fa-circle-o"></i>Procedimientos</a></li> --}}
           </ul>
         </li>
+        @endif
 
       </ul>
     </section>
@@ -133,10 +143,9 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
+      <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>&copy; 2017 Todos los derechos reservados <a href="http://laboratoriodrgarcia.com">Laboratorio Clinico Dr. Garcia</a></strong>
   </footer>
 
 

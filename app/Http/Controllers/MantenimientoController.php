@@ -19,8 +19,9 @@ class MantenimientoController extends Controller
 
     //--------------------AREA DE CLIENTE-------------------------
     public function Cliente(){
-      $nacionalidad = DB::SELECT("SELECT nacionalidades.IdNacionalidades, nacionalidades.Nombre from nacionalidades");
-    	return view('admin.mantenimiento.personas',compact('nacionalidad'));
+      $naciones = DB::select("SELECT nacionalidades.IdNacionalidades, nacionalidades.Nombre from nacionalidades
+");
+    	return view('admin.mantenimiento.personas',compact('naciones'));
     }
 
     public function CrearCliente(Request $request){
@@ -55,9 +56,8 @@ class MantenimientoController extends Controller
     public function CrearProcedimiento(Request $request){
 		$nombre = $request->input('Nombre');
 		$costo = $request->input('CostoPeso');
-		$CostoDolar = $request->input('CostoDolar');
-		$IdUser = $request->input('IdUser');
-    	$guardar  = DB::SELECT(DB::raw("CALL INSERT_Procedimiento('$nombre','$costo','$CostoDolar','$IdUser')"));
+		$IdUser = Auth::user()->IdPersona;
+    $guardar  = DB::SELECT(DB::raw("CALL INSERT_Procedimiento('$nombre','$costo','$IdUser')"));
     	return response()->json([
                 "mensaje"=>"Creado"
                 ]);
@@ -81,10 +81,9 @@ class MantenimientoController extends Controller
     public function EditarProcedimiento(Request $request){
 		$nombre = $request->input('Nombre');
 		$costo = $request->input('CostoPeso');
-		$CostoDolar = $request->input('CostoDolar');
 		$IdProcedimiento = $request->input('IdProcedimiento');
-		$IdUser = $request->input('IdUser');
-    	$guardar  = DB::SELECT(DB::raw("CALL UPDATE_Procedimiento('$nombre','$costo','$CostoDolar','$IdProcedimiento','$IdUser')"));
+		$IdUser = Auth::user()->IdPersona;
+    	$guardar  = DB::SELECT(DB::raw("CALL UPDATE_Procedimiento('$nombre','$costo','$IdProcedimiento','$IdUser')"));
     	return response()->json([
                 "mensaje"=>"Creado"
                 ]);
@@ -104,8 +103,10 @@ class MantenimientoController extends Controller
 
         $Cargos = DB::select("SELECT cargos.IdCargo, cargos.Nombre FROM cargos");
 
+        $naciones = DB::select("SELECT nacionalidades.IdNacionalidades, nacionalidades.Nombre from nacionalidades
+  ");
 
-        return view('admin.mantenimiento.empleado',compact('Sucursales','Cargos'));
+        return view('admin.mantenimiento.empleado',compact('Sucursales','Cargos','naciones'));
     }
 
     public function CrearEmpleado(Request $request){
@@ -124,10 +125,9 @@ class MantenimientoController extends Controller
         $IdCargo = $request->input('IdCargo');
         $Pass = bcrypt($request->input('Pass'));
         $token = "";
-        $emial = "";
-        $guardar  = DB::SELECT(DB::raw("CALL INSERT_PersonaEmpleado('$Cedula','$Nombres','$Apellido1','$Apellido2','$FechaNacimineto','$IdNacionalidad',' $IdSexo','$Telefono','$Celular','$Correo','$IdUser','$Pass','$emial','$token','$IdCargo','$IdSucursal')"));
+        $guardar  = DB::SELECT(DB::raw("CALL INSERT_PersonaEmpleado('$Cedula','$Nombres','$Apellido1','$Apellido2','$FechaNacimineto','$IdNacionalidad',' $IdSexo','$Telefono','$Celular','$Correo','$IdUser','$Pass','$token','$IdCargo','$IdSucursal')"));
         return response()->json([
-                "mensaje"=>"Creado"
+                "mensaje"=> $IdCargo
                 ]);
     }
 
@@ -156,8 +156,8 @@ class MantenimientoController extends Controller
      //---------------------------AREA DE EMPRESA-------------------------------//
 
     public function Empresa(){
-
-        return view('admin.mantenimiento.empresa');
+        $provices = DB::select("SELECT * from municipios");
+        return view('admin.mantenimiento.empresa',compact('provices'));
     }
 
     public function CrearEmpresa(Request $request){
@@ -212,7 +212,9 @@ class MantenimientoController extends Controller
     }
 
     public function ListadoPaciente(){
-        return view('admin.paciente.pacientelis');
+      $naciones = DB::select("SELECT nacionalidades.IdNacionalidades, nacionalidades.Nombre from nacionalidades
+");
+        return view('admin.paciente.pacientelis',compact('naciones'));
     }
 
     public function ObtenerListadoPaciente(){

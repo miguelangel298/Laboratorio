@@ -30,7 +30,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/">Laboratorio <b>Dr. García</b></a>
+    <p><br></p>
+    <a href="/"><img src="/imagen/logo_big.png" style="width: 100%;"/></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
