@@ -20,6 +20,7 @@
                   <input type="text" id="Cedula" class="form-control" placeholder="999-9999999-9" data-inputmask='"mask": "999-9999999-9"' data-mask  >
                   </div>
                 </div>
+                <small id="mensajeCedulaError" class="text-danger hide">Esta cedula ya se encuentra registrada</small>
               </div>
                <div class="form-group">
                 <label>Nombre:</label>
