@@ -196,10 +196,14 @@ ObtenerCliente = function (IdPacienteDatos) {
 			if(res.existencia == 1){
 				$('#DivCc').addClass('has-error');
 				$("#AgregarCliente").attr("disabled", true);
+				$('#mensajeCedulaError').removeClass('show');
+				$('#mensajeCedulaError').addClass('hide');
 			}else{
 				$("#AgregarCliente").attr("disabled", false);
 				$('#DivCc').removeClass('has-error');
 				$('#DivCc').addClass('has-success');
+				$('#mensajeCedulaError').removeClass('hide');
+				$('#mensajeCedulaError').addClass('show');
 			}
 		},
 		error:function(res){

@@ -38,10 +38,14 @@ $(document).ready(function(){
 			if(res.existencia == 1){
 				$('#DivC').addClass('has-error');
 				$("#AgregarCliente").attr("disabled", true);
+				$('#mensajeCedulaError').removeClass('show');
+				$('#mensajeCedulaError').addClass('hide');
 			}else{
 				$("#AgregarCliente").attr("disabled", false);
 				$('#DivC').removeClass('has-error');
 				$('#DivC').addClass('has-success');
+				$('#mensajeCedulaError').removeClass('hide');
+				$('#mensajeCedulaError').addClass('show');
 			}
 		},
 		error:function(res){
