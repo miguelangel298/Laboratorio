@@ -177,6 +177,7 @@
 <script src="/js/vue.min.js" charset="utf-8"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" integrity="sha256-c0m8xzX5oOBawsnLVpHnU2ieISOvxi584aNElFl2W6M=" crossorigin="anonymous"></script>
+<script src="/js/dates.js" charset="utf-8"></script>
 @yield('script')
 
 

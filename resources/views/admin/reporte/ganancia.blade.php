@@ -48,7 +48,7 @@ Laboratorio | Reporte Ganancia
                     <i class="fa fa-calendar"></i>
                   </div>
                   <div id="DivD">
-                    <input type="text" id="desde" placeholder="AAAA-MM-DD" class="form-control pull-right" >
+                    <input type="text" id="desde" placeholder="AAAA-MM-DD" class="form-control pull-right date-picker" autocomplete="off">
                   </div>
                 </div>
               </div>
@@ -60,7 +60,7 @@ Laboratorio | Reporte Ganancia
                     <i class="fa fa-calendar"></i>
                   </div>
                   <div id="DivH">
-                    <input type="text" id="hasta" placeholder="AAAA-MM-DD" class="form-control pull-right" >
+                    <input type="text" id="hasta" placeholder="AAAA-MM-DD" class="form-control pull-right date-picker" autocomplete="off" >
                   </div>
                 </div>
               </div>
