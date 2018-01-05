@@ -24,6 +24,31 @@ $(document).ready(function(){
         SeguroMedico = $(this).val();
 	});
 
+	$("#Cedula").change(function(e){
+		e.preventDefault();
+		var cedula = $(this).val();
+		var route = '/paciente/verificacion';
+		$.ajax({
+			url:route,
+			headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+			type:'POST',
+			dataType:'JSON',
+			data:{cedula:cedula},
+		success: function(res){
+			if(res.existencia == 1){
+				$('#DivC').addClass('has-error');
+				$("#AgregarCliente").attr("disabled", true);
+			}else{
+				$("#AgregarCliente").attr("disabled", false);
+				$('#DivC').removeClass('has-error');
+				$('#DivC').addClass('has-success');
+			}
+		},
+		error:function(res){
+			console.log('Error');
+		}
+		});
+	});
 
 	Limpiar = function(){
 		$("#Nombres,#Apellidos,#Correo,#Cedula,#FechaNacimineto,#Celular,#Telefono,#Apellido2").val("");
@@ -93,7 +118,7 @@ $("#AgregarCliente").click(function(e){
 
 		},
 		error:function(res){
-			alertify.error('Error');
+			console.log('Error');
 		}
 	});
 	}else{

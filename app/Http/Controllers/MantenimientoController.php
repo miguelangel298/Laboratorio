@@ -45,6 +45,11 @@ class MantenimientoController extends Controller
 
     }
 
+    public function verificarPaciente(Request $request){
+      $cedula = $request->input('cedula');
+      $verificar = DB::select("CALL SELECT_ExistenciaPaciente('$cedula')");
+      return Response()->json($verificar[0]);
+    }
 
 //--------------------AREA DE PROCEDIMIENTO-------------------------
 
@@ -64,16 +69,10 @@ class MantenimientoController extends Controller
     }
 
     public function MostrarProcedimiento($id){
-    	$MostrarProcedimiento = DB::SELECT(DB::raw("SELECT T.Nombre as Procedimiento, T.Costo as Peso,T2.Costo as Dolar
-			FROM	(SELECT procedimientos.IdProcedimiento,procedimientos.Nombre, costos.Costo
-						FROM 	procedimientos inner JOIN
+      $MostrarProcedimiento = DB::SELECT(DB::raw("SELECT procedimientos.Nombre as Procedimiento, costos.Costo as Peso
+			FROM	procedimientos inner JOIN
 								costos on costos.IdProcedimiento=procedimientos.IdProcedimiento
-						WHERE	procedimientos.IdProcedimiento='$id' and costos.IdMoneda=1) T inner JOIN
-			         (SELECT procedimientos.IdProcedimiento,procedimientos.Nombre, costos.Costo
-						FROM 	procedimientos inner JOIN
-								costos on costos.IdProcedimiento=procedimientos.IdProcedimiento
-						WHERE	procedimientos.IdProcedimiento='$id' and costos.IdMoneda=2) T2 on T.IdProcedimiento=T2.IdProcedimiento
-			"));
+						WHERE	procedimientos.IdProcedimiento='$id' and costos.IdMoneda=1	"));
 
     	return Response()->json($MostrarProcedimiento[0]);
     }
