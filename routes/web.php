@@ -29,6 +29,8 @@ Route::post('/paciente/crear', 'MantenimientoController@CrearPaciente')->name('C
 
 Route::post('/paciente/update', 'MantenimientoController@UpdatePaciente')->name('UpdatePaciente')->middleware('HasPermission:1,2,3');
 
+Route::post('/paciente/verificacion','MantenimientoController@verificarPaciente')->name('CheckPaciente');
+
 Route::get('/paciente-mostrar/{IdPersona}', 'MantenimientoController@PacienteMostrar')->name('PacienteMostrar')->middleware('HasPermission:1,2,3');
 
 

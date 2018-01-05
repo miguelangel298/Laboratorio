@@ -9,14 +9,14 @@
       <div class="modal-body">
       	<div class="row">
             <div class="col-md-6">
-            <input type="hidden" id="IdUser" value="{{ Auth::user()->IdUser }}">
+            <input type="hidden" id="IdUser" value="{{ Auth::user()->IdUser }} ">
                <div class="form-group">
                 <label>Cedula:</label>
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-address-card"></i>
                   </div>
-                  <div id="DivC">
+                  <div id="DivCc">
                   <input type="text" id="Cedula" class="form-control" placeholder="999-9999999-9" data-inputmask='"mask": "999-9999999-9"' data-mask  >
                   </div>
                 </div>
@@ -147,7 +147,7 @@
                     <i class="fa fa-id-card-o"></i>
                   </div>
                   <div id="DivNS">
-                    <input type="text" id="NumeroSeguro" class="form-control" style="width: 100%;">
+                    <input type="text" id="NumeroSeguro" placeholder="No. de Afiliado" class="form-control" style="width: 100%;">
                   </div>
                 </div>
                 <!-- /.input group -->

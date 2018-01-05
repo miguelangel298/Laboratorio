@@ -182,6 +182,32 @@ ObtenerCliente = function (IdPacienteDatos) {
 				$('#livesearch').addClass('show');
 	});
 
+	$("#Cedula").change(function(e){
+		e.preventDefault();
+		var cedula = $(this).val();
+		var route = '/paciente/verificacion';
+		$.ajax({
+			url:route,
+			headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+			type:'POST',
+			dataType:'JSON',
+			data:{cedula:cedula},
+		success: function(res){
+			if(res.existencia == 1){
+				$('#DivCc').addClass('has-error');
+				$("#AgregarCliente").attr("disabled", true);
+			}else{
+				$("#AgregarCliente").attr("disabled", false);
+				$('#DivCc').removeClass('has-error');
+				$('#DivCc').addClass('has-success');
+			}
+		},
+		error:function(res){
+			console.log('Error');
+		}
+		});
+	});
+
 
 	var suma = 0;
 	var procedimientos= [];
@@ -433,7 +459,7 @@ $("#AgregarProcedimiento").click(function(e){
 
 	Limpiar = function(){
 		$("#Nombres,#Apellidos,#Correo,#Cedula,#FechaNacimineto,#Celular,#Telefono,#Apellido2").val("");
-		$("#DivN,#DivA,#DivS,#DivE,#DivC,#DivF,#DivNc,#DivSG,#DivCl,#DivSP").removeClass('has-error');
+		$("#DivN,#DivA,#DivS,#DivE,#DivCc,#DivF,#DivNc,#DivSG,#DivCl,#DivSP").removeClass('has-error');
 		$('#IdSexo').prop('selectedIndex',0);
 		$('#IdNacionalidad').prop('selectedIndex',0);
 		$('#SeguroMedico').prop('selectedIndex',0);
@@ -553,13 +579,13 @@ $("#AgregarCliente").click(function(e){
 		}
 
 		if($("#Cedula").val()==""){
-			$("#DivC").addClass('has-error');
+			$("#DivCc").addClass('has-error');
 			if(errores!=""){errores+="* Ingrese Cedula.<hr>";
 			}else{
 				errores+="* Ingrese Cedula.<hr>";
 			}
 		}else{
-			$("#DivC").removeClass('has-error');
+			$("#DivCc").removeClass('has-error');
 		}
 
 		if($("#FechaNacimineto").val()==""){
