@@ -126,8 +126,9 @@ class MantenimientoController extends Controller
         $token = "";
         $guardar  = DB::SELECT(DB::raw("CALL INSERT_PersonaEmpleado('$Cedula','$Nombres','$Apellido1','$Apellido2','$FechaNacimineto','$IdNacionalidad',' $IdSexo','$Telefono','$Celular','$Correo','$IdUser','$Pass','$token','$IdCargo','$IdSucursal')"));
         return response()->json([
-                "mensaje"=> $IdCargo
-                ]);
+            "mensaje"=> $IdCargo,
+            "usuarioMostrar" => $guardar->UsuarioMostrar
+        ]);
     }
 
     //--------------UPDATE EMPLEADO---------------------------------//
