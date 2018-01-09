@@ -124,10 +124,10 @@ class MantenimientoController extends Controller
         $IdCargo = $request->input('IdCargo');
         $Pass = bcrypt($request->input('Pass'));
         $token = "";
-        $guardar  = DB::SELECT("CALL INSERT_PersonaEmpleado('$Cedula','$Nombres','$Apellido1','$Apellido2','$FechaNacimineto','$IdNacionalidad',' $IdSexo','$Telefono','$Celular','$Correo','$IdUser','$Pass','$token','$IdCargo','$IdSucursal')");
+        $guardar = DB::SELECT("CALL INSERT_PersonaEmpleado('$Cedula','$Nombres','$Apellido1','$Apellido2','$FechaNacimineto','$IdNacionalidad',' $IdSexo','$Telefono','$Celular','$Correo','$IdUser','$Pass','$token','$IdCargo','$IdSucursal')");
         return response()->json([
             "mensaje"=> $IdCargo,
-            "usuarioMostrar" => $guardar->UsuarioMostrar
+            "usuarioMostrar" => $guardar[0]->UsuarioMuestra
         ]);
     }
 
