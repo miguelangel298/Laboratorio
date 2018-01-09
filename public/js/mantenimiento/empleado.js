@@ -195,11 +195,12 @@ $("#AgregarEmpleado").click(function(e){
 			Pass:Pass},
 
 		success: function(res){
+			nuevoUsuario = res.usuarioMostrar;
 			swal({
 				title: 'GUARDADO!',
 				type: 'success',
 				html:
-				  'Empleado Guardado <b>Correctamente </b>. ',
+				  'Empleado Guardado correctamente como: <b>' + nuevoUsuario + '</b>.',
 				showCloseButton: true,
 				focusConfirm: false,
 				confirmButtonText:
