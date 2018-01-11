@@ -19,9 +19,9 @@ class MantenimientoController extends Controller
 
     //--------------------AREA DE CLIENTE-------------------------
     public function Cliente(){
-      $naciones = DB::select("SELECT nacionalidades.IdNacionalidades, nacionalidades.Nombre from nacionalidades
-");
-    	return view('admin.mantenimiento.personas',compact('naciones'));
+      $naciones = DB::select("SELECT nacionalidades.IdNacionalidades, nacionalidades.Nombre from nacionalidades");
+      $ars = DB::select('SELECT Nombre from ARS');
+    	return view('admin.mantenimiento.personas',compact('naciones', 'ars'));
     }
 
     public function CrearCliente(Request $request){
@@ -214,7 +214,8 @@ class MantenimientoController extends Controller
     public function ListadoPaciente(){
       $naciones = DB::select("SELECT nacionalidades.IdNacionalidades, nacionalidades.Nombre from nacionalidades
 ");
-        return view('admin.paciente.pacientelis',compact('naciones'));
+      $ars = DB::select('SELECT Nombre from ARS');
+        return view('admin.paciente.pacientelis',compact('naciones', 'ars'));
     }
 
     public function ObtenerListadoPaciente(){

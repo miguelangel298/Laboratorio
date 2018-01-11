@@ -159,9 +159,10 @@ Laboratorio | Agregar Paciente
                   </div>
                   <div id="DivSG">
                     <select id="SeguroMedico" class="form-control select2" style="width: 100%;">
-                    <option selected="selected" disabled="">Seguro Medico</option>
-                    <option value="ARS">ARS</option>
-                    <option value="PALIC">PALIC</option>
+                      <option selected="selected" disabled="">Seguro Medico</option>
+                    @foreach($ars as $a)
+                      <option value="{{a->Nombre}}">{{a->Nombre}}</option>
+                    @endforeach
                   </select>
                   </div>
                 </div>
