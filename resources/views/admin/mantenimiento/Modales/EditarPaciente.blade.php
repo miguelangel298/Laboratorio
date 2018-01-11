@@ -132,7 +132,7 @@
                     <select id="SeguroMedico" class="form-control select2" style="width: 100%;">
                     <option selected="selected" disabled="">Seguro Medico</option>
                     @foreach($ars as $a)
-                      <option value="{{a->Nombre}}">{{a->Nombre}}</option>
+                      <option value="{{$a->Nombre}}">{{$a->Nombre}}</option>
                     @endforeach
                   </select>
                   </div>
