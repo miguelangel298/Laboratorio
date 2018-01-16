@@ -65,6 +65,7 @@ Laboratorio | Factura
                 </div>
             </div>
       </div>
+      <i class="fa fa-spin fa-spinner fa-lg" id="loading-btn" style="margin-top: 10px;"></i>
       <div class="col-md-2">
         <!-- <button type="submit" value="" :disabled="busqueda.length == 0" @click.prevent="getCurrentPaciente()" id="ObtenerCliente" class="btn btn-primary">Buscar</button> -->
         <button type="button" value="" v-show="busqueda.length == 0" v-cloak class="btn btn-success" data-target="#agregarClienteModal" data-toggle="modal"><i class="fa fa-plus" style="margin-right: 10px;"></i>Agregar Paciente</button>

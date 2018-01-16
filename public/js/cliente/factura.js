@@ -85,6 +85,8 @@ $('#IdPacienteDatos').click(function () {
 
 });
 
+
+$('#loading-btn').hide();
 var DollarValor = "";
 var date = "";
 var f=new Date();
@@ -117,15 +119,21 @@ $("#IdProcedimiento").select2();
 		});
 var IdPersona = "";
 ObtenerCliente = function (IdPacienteDatos) {
+	$("#informacion").hide();
+	$('#loading-btn').show();
+	$("#contenidoFactura").show();
+	$("#contenedorDatos").show();
 	var RutaDatos = "/factura/cliente/datos/"+IdPacienteDatos+"";
 	$.get(RutaDatos, function(data) {
+		$('#loading-btn').hide();
 		if (data.Error == 'Funciona') {
+		$("#informacion").show();
+		$("#contenidoFactura").hide();
+		$("#contenedorDatos").show();
 		$("#contenedorDatos").html("<div class='alert alert-warning alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button><h4><i class='icon fa fa-warning'></i> Cliente no esta Registrado!</h4>Dirigirse a la seccion mantenimiento/cliente para Procesar con la Factura.</div><hr> ");
 
 		}else{
-			$("#informacion").hide();
-			$("#contenidoFactura").show();
-			$("#contenedorDatos").show();
+
 			$("#contenedorDatos").html("<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><address><strong>Nombre: </strong>"+data.Nombre+"<br><strong>Cedula: </strong>"+data.Cedula+"<br><strong>Correo:</strong> "+data.Correo+"</address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'> <address><strong>Nacionalidad: </strong>"+data.IdNacionalidad+"<br><strong>Fecha de Nacimiento: </strong>"+data.FechaNacimineto.substr(0, 10) +"<br><strong>Sexo: </strong>"+data.Sexo +"<br></address></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 invoice-col'><b>Seguro de Salud: </b>"+data.SeguroMedico+"<br><b>No. de Afiliado: </b>"+data.NumeroSeguro+"<br><b>Telefono:</b> "+data.Celular+"<br></div></div><hr>");
 			$("#IdCliente").val(data.IdPersona);
 			IdPersona = data.IdPersona;
