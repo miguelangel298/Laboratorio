@@ -52,7 +52,7 @@ Creación de un nuevo paciente dicho formulario tiene validación de los campos 
 
 ## Mantenimiento/ Procedimientos
 
-En esta sección puedes **Crear, Editar y obtener el listado de procedimientos existente.** Al poner el costo RD$ del procedimiento **este mismo calcula su valor en UD$ con la divisa** registrada en la base de datos al actualizar el divisa su costo en UD$ cambia.
+En esta sección puedes **Crear, Editar y obtener el listado de procedimientos existente.** Al poner el costo RD$ del procedimiento **este mismo calcula su valor en UD$ con la divisa** registrada en la base de datos al actualizar el divisa su costo en US$ cambia.
 
 <img src="https://preview.ibb.co/d0koJo/Screenshot_2018_07_26_Laboratorio_Procedimientos.png" alt="Screenshot_2018_07_26_Laboratorio_Procedimientos" border="0">
 
