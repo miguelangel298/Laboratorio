@@ -27,12 +27,12 @@ RUN apk add --update \
     php7-tokenizer \
     php7-session \
     php7-simplexml \
-#    php7-xdebug \
+    php7-xmlwriter \
     php7-zip \
     make \
     curl \
-    nodejs \
-    yarn
+    # nodejs \
+    # yarn
 
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/* && \
     curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
@@ -42,7 +42,7 @@ ADD php.ini /etc/php7/cli/conf.d/
 ADD php-fpm.conf /etc/php7/php-fpm.d/
 #ADD xdebug.ini  /etc/php7/conf.d/
 
-WORKDIR /var/www/symfony
+WORKDIR /var/www/laravel
 
 RUN adduser -D -g 'www' www \
     && chown -R www:www /var/www
